@@ -12,17 +12,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PatientDto {
 
-    //private Long id;
+    private UUID id;
 
-    private UUID cartNumber;
-
-    //private FIODto fio;
-
-    private String firstName;
-
-    private String lastName;
-
-    private String patronymic;
+    private FIODto fio;
 
     private LocalDate birthday;
 

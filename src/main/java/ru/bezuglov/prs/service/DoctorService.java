@@ -3,7 +3,6 @@ package ru.bezuglov.prs.service;
 import ru.bezuglov.prs.dto.DoctorDto;
 import ru.bezuglov.prs.dto.DoctorNewDto;
 import ru.bezuglov.prs.dto.DoctorShortDto;
-import ru.bezuglov.prs.dto.FIONewDto;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,5 +1,6 @@
 package ru.bezuglov.prs.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,23 +14,14 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DoctorDto {
 
-   // private Long id;
-
     private UUID id;
 
-    //private FIODto fio;
+    private FIODto fio;
 
-    private String firstName;
+    private Specialization specialization;
 
-    private String lastName;
-
-    private String patronymic;
-
-    //private Specialization specialization;
-
-    private String specialization;
-
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime startWork;
-
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime endWork;
 }

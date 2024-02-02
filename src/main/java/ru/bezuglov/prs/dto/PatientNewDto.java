@@ -11,13 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class PatientNewDto {
 
-    //private FIODto fio;
-
-    private String firstName;
-
-    private String lastName;
-
-    private String patronymic;
+    private FIODto fio;
 
     private LocalDate birthday;
 

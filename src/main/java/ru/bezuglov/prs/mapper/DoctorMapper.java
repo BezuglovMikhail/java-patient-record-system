@@ -6,6 +6,8 @@ import ru.bezuglov.prs.dto.DoctorNewDto;
 import ru.bezuglov.prs.dto.DoctorShortDto;
 import ru.bezuglov.prs.model.Doctor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @UtilityClass
@@ -14,34 +16,53 @@ public class DoctorMapper {
     public DoctorDto toDoctorDto(Doctor doctor) {
         DoctorDto doctorDto = new DoctorDto();
         doctorDto.setId(doctor.getId());
-        doctorDto.setFirstName(doctor.getFirstName());
-        doctorDto.setLastName(doctor.getLastName());
-        doctorDto.setPatronymic(doctor.getPatronymic());
+        doctorDto.setFio(FIOMapper.toFIODto(doctor.getFio()));
         doctorDto.setSpecialization(doctor.getSpecialization());
-        doctorDto.setEndWork(doctor.getStartWork());
+        doctorDto.setStartWork(doctor.getStartWork());
         doctorDto.setEndWork(doctor.getEndWork());
         return doctorDto;
     }
 
     public DoctorShortDto toDoctorShortDto(Doctor doctor) {
         DoctorShortDto doctorShortDto = new DoctorShortDto();
-        doctorShortDto.setFirstName(doctor.getFirstName());
-        doctorShortDto.setLastName(doctor.getLastName());
-        doctorShortDto.setPatronymic(doctor.getPatronymic());
-        doctorShortDto.setId(doctor.getId());
+        doctorShortDto.setFio(FIOMapper.toFIODto(doctor.getFio()));
+        //doctorShortDto.setId(doctor.getId());
         doctorShortDto.setSpecialization(doctor.getSpecialization());
         return doctorShortDto;
     }
 
     public Doctor toDoctor(DoctorNewDto doctorNewDto) {
         Doctor doctor = new Doctor();
-        doctor.setFirstName(doctorNewDto.getFirstName());
-        doctor.setLastName(doctorNewDto.getLastName());
-        doctor.setPatronymic(doctorNewDto.getPatronymic());
+        doctor.setFio(FIOMapper.toFIO(doctorNewDto.getFio()));
         doctor.setSpecialization(doctorNewDto.getSpecialization());
         doctor.setStartWork(doctorNewDto.getStartWork());
         doctor.setEndWork(doctorNewDto.getEndWork());
         return doctor;
     }
 
+    public Doctor toUpdateDto(DoctorNewDto updateDoctor, Doctor oldDoctor) {
+        Doctor newDoctor = new Doctor();
+        newDoctor.setId(oldDoctor.getId());
+        newDoctor.setFio(!updateDoctor.getFio().equals(oldDoctor.getFio())
+                ? FIOMapper.toFIO(updateDoctor.getFio())
+                : oldDoctor.getFio());
+        newDoctor.setStartWork(updateDoctor.getStartWork() != null
+                ? updateDoctor.getStartWork()
+                : oldDoctor.getStartWork());
+        newDoctor.setEndWork(updateDoctor.getEndWork() != null
+                ? updateDoctor.getEndWork()
+                : oldDoctor.getEndWork());
+        newDoctor.setSpecialization(updateDoctor.getSpecialization() != null
+                ? updateDoctor.getSpecialization()
+                : oldDoctor.getSpecialization());
+        return newDoctor;
+    }
+
+    public List<DoctorShortDto> mapToDoctorDto(Iterable<Doctor> doctors) {
+        List<DoctorShortDto> result = new ArrayList<>();
+        for (Doctor doctor : doctors) {
+            result.add(toDoctorShortDto(doctor));
+        }
+        return result;
+    }
 }

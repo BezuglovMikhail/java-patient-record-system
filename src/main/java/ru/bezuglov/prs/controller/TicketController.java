@@ -61,5 +61,4 @@ public class TicketController {
         ticketService.delete(ticketId);
         log.info("Ticket whit ticketId = {} delete.", ticketId);
     }
-
 }

@@ -28,29 +28,29 @@ public class PatientController {
     }
 
     @GetMapping()
-    public List<PatientShortDto> getListPatients(@RequestParam(required = false) Integer locationNumber) {
-        List<PatientShortDto> patient = patientService.findListPatients(locationNumber);
+    public List<PatientShortDto> getListPatients() {
+        List<PatientShortDto> patient = patientService.findListPatients();
         log.info("Find listPatients");
         return patient;
     }
 
-    @GetMapping("/{cartNumber}")
-    public PatientDto getPatient(@PathVariable("personnelNumber") UUID cartNumber) {
-        PatientDto patient = patientService.findPatient(cartNumber);
-        log.info("Find patient whit cartNumber = {}", cartNumber);
+    @GetMapping("/{id}")
+    public PatientDto getPatient(@PathVariable("id") UUID id) {
+        PatientDto patient = patientService.findPatient(id);
+        log.info("Find patient whit cartNumber = {}", id);
         return patient;
     }
 
-    @PatchMapping("/{cartNumber}")
-    public PatientShortDto updatePatient(@PathVariable("personnelNumber") UUID cartNumber, PatientNewDto patientUpdate) {
-        PatientShortDto patient = patientService.update(patientUpdate, cartNumber);
-        log.info("Update patient whit cartNumber = {}", cartNumber);
+    @PatchMapping("/{id}")
+    public PatientShortDto updatePatient(@PathVariable("id") UUID id, @Valid @RequestBody PatientNewDto patientUpdate) {
+        PatientShortDto patient = patientService.update(patientUpdate, id);
+        log.info("Update patient whit cartNumber = {}", id);
         return patient;
     }
 
-    @DeleteMapping("/{cartNumber}")
-    public void deletePatient(@PathVariable("personnelNumber") UUID cartNumber) {
-        patientService.delete(cartNumber);
-        log.info("patient whit cartNumber = {} delete.", cartNumber);
+    @DeleteMapping("/{id}")
+    public void deletePatient(@PathVariable("id") UUID id) {
+        patientService.delete(id);
+        log.info("patient whit cartNumber = {} delete.", id);
     }
 }

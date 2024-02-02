@@ -9,8 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FIODto {
 
-    private Long id;
-
     private String firstName;
 
     private String lastName;

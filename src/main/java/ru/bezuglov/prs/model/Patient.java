@@ -13,24 +13,17 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "patient")
+@Table(name = "patients")
 public class Patient {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    //private Long id;
-    //номер карты
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID cartNumber;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", insertable = false, updatable = false, nullable = false)
+    private UUID id;
+
     //ФИО
-    //@ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "fio_id", referencedColumnName = "id")
-    //private FIO fio;
-    private String firstName;
-
-    private String lastName;
-
-    private String patronymic;
+    @Embedded
+    private FIO fio;
 
     @Past
     private LocalDate birthday;

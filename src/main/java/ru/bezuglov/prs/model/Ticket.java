@@ -24,8 +24,7 @@ public class Ticket {
     private Doctor doctor;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "patient_id", referencedColumnName = "id")
-    @JoinColumn(name = "cartNumber", referencedColumnName = "cartNumber")
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
     private Patient patient;
 
     //начало приема

@@ -11,15 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PatientShortDto {
 
-    //private Long id;
+    private FIODto fio;
 
-    private UUID cartNumber;
-
-    //private FIODto fio;
-
-    private String firstName;
-
-    private String lastName;
-
-    private String patronymic;
+    private Integer locationNumber;
 }

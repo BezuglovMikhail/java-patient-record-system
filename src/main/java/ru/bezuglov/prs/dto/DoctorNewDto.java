@@ -1,5 +1,7 @@
 package ru.bezuglov.prs.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -14,18 +16,15 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class DoctorNewDto {
 
-    //private FIONewDto fio;
-    private String firstName;
 
-    private String lastName;
+    private FIODto fio;
 
-    private String patronymic;
+    @NotBlank
+    private Specialization specialization;
 
-    //@NotBlank
-    //private Specialization specialization;
-    private String specialization;
-
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime startWork;
 
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime endWork;
 }

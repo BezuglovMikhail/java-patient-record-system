@@ -12,18 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DoctorShortDto {
 
-    //private Long id;
+    private FIODto fio;
 
-    private String firstName;
-
-    private String lastName;
-
-    private String patronymic;
-
-    private UUID id;
-
-    //private FIODto fio;
-
-    //private Specialization specialization;
-    private String specialization;
+    private Specialization specialization;
 }

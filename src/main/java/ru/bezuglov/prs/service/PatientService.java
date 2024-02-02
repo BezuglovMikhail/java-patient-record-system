@@ -11,12 +11,12 @@ public interface PatientService {
 
     PatientShortDto save(PatientNewDto patientNewDto);
 
-    PatientShortDto update(PatientNewDto patientUpdate, UUID cartNumber);
+    PatientShortDto update(PatientNewDto patientUpdate, UUID uuid);
 
     void delete(UUID cartNumber);
 
     PatientDto findPatient(UUID cardNumber);
 
-    List<PatientShortDto> findListPatients(Integer locationNumber);
+    List<PatientShortDto> findListPatients();
 
 }

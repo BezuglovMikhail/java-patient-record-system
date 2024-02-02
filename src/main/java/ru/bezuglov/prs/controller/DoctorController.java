@@ -36,23 +36,23 @@ public class DoctorController {
         return doctor;
     }
 
-    @GetMapping("/{personnelNumber}")
-    public DoctorDto getDoctor(@PathVariable("personnelNumber") UUID personnelNumber) {
-        DoctorDto doctor = doctorService.findDoctor(personnelNumber);
-        log.info("Find doctor whit personnelNumber = {}", personnelNumber);
+    @GetMapping("/{uuid}")
+    public DoctorDto getDoctor(@PathVariable("uuid") UUID uuid) {
+        DoctorDto doctor = doctorService.findDoctor(uuid);
+        log.info("Find doctor whit personnelNumber = {}", uuid);
         return doctor;
     }
 
-    @PatchMapping("/{personnelNumber}")
-    public DoctorDto updateDoctor(@PathVariable("personnelNumber") UUID personnelNumber, DoctorNewDto doctorUpdate) {
-        DoctorDto doctor = doctorService.update(doctorUpdate, personnelNumber);
-        log.info("Update doctor whit personnelNumber = {}", personnelNumber);
+    @PatchMapping("/{uuid}")
+    public DoctorDto updateDoctor(@PathVariable("uuid") UUID uuid, @RequestBody DoctorNewDto doctorUpdate) {
+        DoctorDto doctor = doctorService.update(doctorUpdate, uuid);
+        log.info("Update doctor whit personnelNumber = {}", uuid);
         return doctor;
     }
 
-    @DeleteMapping("/{personnelNumber}")
-    public void deleteDoctor(@PathVariable("personnelNumber") UUID personnelNumber) {
-        doctorService.delete(personnelNumber);
-        log.info("Doctor whit personnelNumber = {} delete.", personnelNumber);
+    @DeleteMapping("/{uuid}")
+    public void deleteDoctor(@PathVariable("uuid") UUID uuid) {
+        doctorService.delete(uuid);
+        log.info("Doctor whit personnelNumber = {} delete.", uuid);
     }
 }
