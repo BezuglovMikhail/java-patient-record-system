@@ -15,11 +15,19 @@ public class DoctorDto {
 
    // private Long id;
 
-    private UUID personnelNumber;
+    private UUID id;
 
-    private FIODto fio;
+    //private FIODto fio;
 
-    private Specialization specialization;
+    private String firstName;
+
+    private String lastName;
+
+    private String patronymic;
+
+    //private Specialization specialization;
+
+    private String specialization;
 
     private LocalTime startWork;
 

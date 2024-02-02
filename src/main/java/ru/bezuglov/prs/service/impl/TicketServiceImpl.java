@@ -7,16 +7,19 @@ import ru.bezuglov.prs.dto.TicketDto;
 import ru.bezuglov.prs.dto.TicketFreeDto;
 import ru.bezuglov.prs.service.TicketService;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 @Slf4j
 public class TicketServiceImpl implements TicketService {
     @Override
-    public TicketDto save(TicketFreeDto ticketFreeDto, PatientShortDto patient) {
+    public TicketDto save(TicketFreeDto ticketFreeDto, UUID cartNumber) {
         return null;
     }
 
     @Override
-    public TicketDto update(TicketFreeDto ticketUpdate, Long id) {
+    public TicketDto update(TicketFreeDto ticketUpdate, Long oldTicketId) {
         return null;
     }
 
@@ -26,7 +29,17 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketDto getTicket(Long id) {
+    public TicketDto findTicket(Long id) {
+        return null;
+    }
+
+    @Override
+    public List<TicketFreeDto> findListFreeTickets(String specialization) {
+        return null;
+    }
+
+    @Override
+    public List<TicketDto> findListBlockTickets(String specialization) {
         return null;
     }
 }

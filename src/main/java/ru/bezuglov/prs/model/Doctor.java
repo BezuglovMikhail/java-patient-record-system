@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.bezuglov.prs.until.Specialization;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalTime;
 import java.util.UUID;
@@ -25,17 +25,24 @@ public class Doctor {
     //private Integer personnelNumber;
     //табельный номер
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID personnelNumber;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id", insertable = false, updatable = false, nullable = false)
+    private UUID id;
 
     //ФИО
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fio_id", referencedColumnName = "id")
-    private FIO fio;
+    //@ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "fio_id", referencedColumnName = "id")
+    //private FIO fio;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String patronymic;
 
     //Специализация врача
-    @Enumerated(EnumType.STRING)
-    private Specialization specialization;
+    //@Enumerated(EnumType.STRING)
+    private String specialization;
 
     //начало рабочего дня
     private LocalTime startWork;

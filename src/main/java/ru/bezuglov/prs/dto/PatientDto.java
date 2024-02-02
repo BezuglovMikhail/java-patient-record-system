@@ -16,11 +16,17 @@ public class PatientDto {
 
     private UUID cartNumber;
 
-    private FIODto fio;
+    //private FIODto fio;
+
+    private String firstName;
+
+    private String lastName;
+
+    private String patronymic;
 
     private LocalDate birthday;
 
     private String address;
 
-    private Integer parcelNumber;
+    private Integer locationNumber;
 }

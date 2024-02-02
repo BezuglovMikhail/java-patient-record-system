@@ -1,18 +1,22 @@
 package ru.bezuglov.prs.service;
 
 import ru.bezuglov.prs.dto.PatientDto;
+import ru.bezuglov.prs.dto.PatientNewDto;
 import ru.bezuglov.prs.dto.PatientShortDto;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface PatientService {
 
-    PatientShortDto save(PatientDto patientDto);
+    PatientShortDto save(PatientNewDto patientNewDto);
 
-    PatientShortDto update(PatientDto patientUpdate, UUID cartNumber);
+    PatientShortDto update(PatientNewDto patientUpdate, UUID cartNumber);
 
     void delete(UUID cartNumber);
 
-    PatientShortDto findPatient(UUID cardNumber);
+    PatientDto findPatient(UUID cardNumber);
+
+    List<PatientShortDto> findListPatients(Integer locationNumber);
 
 }

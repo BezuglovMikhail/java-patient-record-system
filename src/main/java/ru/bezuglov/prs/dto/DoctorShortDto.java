@@ -14,9 +14,16 @@ public class DoctorShortDto {
 
     //private Long id;
 
-    private UUID personnelNumber;
+    private String firstName;
 
-    private FIODto fio;
+    private String lastName;
 
-    private Specialization specialization;
+    private String patronymic;
+
+    private UUID id;
+
+    //private FIODto fio;
+
+    //private Specialization specialization;
+    private String specialization;
 }

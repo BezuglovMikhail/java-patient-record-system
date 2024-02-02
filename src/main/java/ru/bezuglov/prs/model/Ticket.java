@@ -20,8 +20,7 @@ public class Ticket {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "doctor_id", referencedColumnName = "id")
-    @JoinColumn(name = "personnelNumber", referencedColumnName = "personnelNumber")
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id")
     private Doctor doctor;
 
     @ManyToOne(cascade = CascadeType.ALL)

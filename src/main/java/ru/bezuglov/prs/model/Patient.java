@@ -23,9 +23,14 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID cartNumber;
     //ФИО
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fio_id", referencedColumnName = "id")
-    private FIO fio;
+    //@ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "fio_id", referencedColumnName = "id")
+    //private FIO fio;
+    private String firstName;
+
+    private String lastName;
+
+    private String patronymic;
 
     @Past
     private LocalDate birthday;
@@ -34,5 +39,5 @@ public class Patient {
     private String address;
 
     //номер участка
-    private Integer parcelNumber;
+    private Integer locationNumber;
 }

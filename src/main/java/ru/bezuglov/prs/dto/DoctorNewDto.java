@@ -14,14 +14,18 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class DoctorNewDto {
 
-    private FIODto fio;
+    //private FIONewDto fio;
+    private String firstName;
 
-    @NotBlank
-    private Specialization specialization;
+    private String lastName;
 
-    @Future
+    private String patronymic;
+
+    //@NotBlank
+    //private Specialization specialization;
+    private String specialization;
+
     private LocalTime startWork;
 
-    @Future
     private LocalTime endWork;
 }
