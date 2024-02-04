@@ -22,12 +22,12 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorShortDto save(DoctorNewDto doctorNewDto) {
-        return DoctorMapper.toDoctorShortDto(doctorRepository.save(DoctorMapper.toDoctor(doctorNewDto)));
+        return DoctorMapper.toDoctorShortDto(doctorRepository.save(DoctorMapper.toDoctorNew(doctorNewDto)));
     }
 
     @Override
-    public List<DoctorShortDto> findListDoctors(String specialization) {
-        return DoctorMapper.mapToDoctorDto(doctorRepository.findAll());
+    public List<DoctorShortDto> findListDoctors() {
+        return DoctorMapper.mapToDoctorShortDto(doctorRepository.findAll());
     }
 
     @Override

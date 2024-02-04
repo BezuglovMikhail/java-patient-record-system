@@ -5,9 +5,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.bezuglov.prs.dto.TicketDto;
+import ru.bezuglov.prs.dto.TicketBlockDto;
 import ru.bezuglov.prs.dto.TicketFreeDto;
 import ru.bezuglov.prs.service.TicketService;
+import ru.bezuglov.prs.until.Specialization;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,37 +23,40 @@ public class TicketController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public TicketDto saveTicket(@Valid @RequestBody TicketFreeDto ticketFree, UUID cartNumber) {
-        TicketDto addTicket = ticketService.save(ticketFree, cartNumber);
+    public TicketBlockDto saveTicket(@Valid @RequestBody TicketFreeDto ticketFree, @RequestParam UUID cartNumber) {
+        TicketBlockDto addTicket = ticketService.save(ticketFree, cartNumber);
         log.info("Add ticket: {}", addTicket);
         return addTicket;
     }
 
     @GetMapping("/block")
-    public List<TicketDto> getListBlockTickets(@RequestParam(required = false) String specialization) {
-        List<TicketDto> ticket = ticketService.findListBlockTickets(specialization);
+    public List<TicketBlockDto> getListBlockTickets(@RequestParam(required = false) Specialization specialization) {
+        List<TicketBlockDto> ticketBlockList = ticketService.findListBlockTickets(specialization);
         log.info("Find listBlockTickets");
-        return ticket;
+        return ticketBlockList;
     }
 
     @GetMapping("/free")
-    public List<TicketFreeDto> getListFreeTickets(@RequestParam(required = false) String specialization) {
-        List<TicketFreeDto> ticket = ticketService.findListFreeTickets(specialization);
-        log.info("Find listBlockTickets");
-        return ticket;
+    public List<TicketFreeDto> getListFreeTickets(@RequestParam(required = false) Specialization specialization,
+                                                  @RequestParam(defaultValue = "15") Long min,
+                                                  @RequestParam(defaultValue = "1") Long countDay) {
+        List<TicketFreeDto> ticketFreeList = ticketService.findListFreeTickets(specialization, min, countDay);
+        log.info("Find listFreeTickets");
+        return ticketFreeList;
     }
 
     @GetMapping("/{ticketId}")
-    public TicketDto getTicket(@PathVariable Long ticketId) {
-        TicketDto ticket = ticketService.findTicket(ticketId);
+    public TicketBlockDto getTicket(@PathVariable Long ticketId) {
+        TicketBlockDto ticket = ticketService.findTicket(ticketId);
         log.info("Find ticket whit id = {}", ticketId);
         return ticket;
     }
 
     @PatchMapping("/{ticketId}")
-    public TicketDto updateTicket(@Valid @RequestBody TicketFreeDto ticketFree, @PathVariable Long oldTicketId) {
-        TicketDto updateTicket = ticketService.update(ticketFree, oldTicketId);
-        log.info("Update ticket whit id = {}", oldTicketId);
+    public TicketBlockDto updateTicket(@Valid @RequestBody TicketFreeDto ticketFree, @PathVariable Long ticketId,
+                                       @RequestParam UUID cartNumber) {
+        TicketBlockDto updateTicket = ticketService.update(ticketFree, ticketId, cartNumber);
+        log.info("Update ticket whit id = {}", ticketId);
         return updateTicket;
     }
 

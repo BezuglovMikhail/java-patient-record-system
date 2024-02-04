@@ -8,7 +8,6 @@ import ru.bezuglov.prs.model.Doctor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @UtilityClass
 public class DoctorMapper {
@@ -26,12 +25,30 @@ public class DoctorMapper {
     public DoctorShortDto toDoctorShortDto(Doctor doctor) {
         DoctorShortDto doctorShortDto = new DoctorShortDto();
         doctorShortDto.setFio(FIOMapper.toFIODto(doctor.getFio()));
-        //doctorShortDto.setId(doctor.getId());
+        doctorShortDto.setId(doctor.getId());
         doctorShortDto.setSpecialization(doctor.getSpecialization());
         return doctorShortDto;
     }
 
-    public Doctor toDoctor(DoctorNewDto doctorNewDto) {
+    public DoctorShortDto toDoctorShortDto(DoctorDto doctor) {
+        DoctorShortDto doctorShortDto = new DoctorShortDto();
+        doctorShortDto.setFio(doctor.getFio());
+        doctorShortDto.setId(doctor.getId());
+        doctorShortDto.setSpecialization(doctor.getSpecialization());
+        return doctorShortDto;
+    }
+
+    public Doctor toDoctor(DoctorDto doctorDto) {
+        Doctor doctor = new Doctor();
+        doctor.setId(doctorDto.getId());
+        doctor.setFio(FIOMapper.toFIO(doctorDto.getFio()));
+        doctor.setSpecialization(doctorDto.getSpecialization());
+        doctor.setStartWork(doctorDto.getStartWork());
+        doctor.setEndWork(doctorDto.getEndWork());
+        return doctor;
+    }
+
+    public Doctor toDoctorNew(DoctorNewDto doctorNewDto) {
         Doctor doctor = new Doctor();
         doctor.setFio(FIOMapper.toFIO(doctorNewDto.getFio()));
         doctor.setSpecialization(doctorNewDto.getSpecialization());
@@ -58,10 +75,17 @@ public class DoctorMapper {
         return newDoctor;
     }
 
-    public List<DoctorShortDto> mapToDoctorDto(Iterable<Doctor> doctors) {
+    public List<DoctorShortDto> mapToDoctorShortDto(Iterable<Doctor> doctors) {
         List<DoctorShortDto> result = new ArrayList<>();
         for (Doctor doctor : doctors) {
             result.add(toDoctorShortDto(doctor));
+        }
+        return result;
+    }
+    public List<DoctorDto> mapToDoctorDto(Iterable<Doctor> doctors) {
+        List<DoctorDto> result = new ArrayList<>();
+        for (Doctor doctor : doctors) {
+            result.add(toDoctorDto(doctor));
         }
         return result;
     }

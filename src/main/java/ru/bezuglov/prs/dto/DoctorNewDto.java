@@ -1,8 +1,6 @@
 package ru.bezuglov.prs.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Embedded;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +13,6 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 public class DoctorNewDto {
-
 
     private FIODto fio;
 

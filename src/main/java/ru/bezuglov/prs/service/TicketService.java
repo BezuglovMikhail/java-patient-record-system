@@ -1,22 +1,23 @@
 package ru.bezuglov.prs.service;
 
-import ru.bezuglov.prs.dto.TicketDto;
+import ru.bezuglov.prs.dto.TicketBlockDto;
 import ru.bezuglov.prs.dto.TicketFreeDto;
+import ru.bezuglov.prs.until.Specialization;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface TicketService {
 
-    TicketDto save(TicketFreeDto ticketFreeDto, UUID cartNumber);
+    TicketBlockDto save(TicketFreeDto ticketFreeDto, UUID cartNumber);
 
-    TicketDto update(TicketFreeDto ticketUpdate, Long oldTicketId);
+    TicketBlockDto update(TicketFreeDto ticketUpdate, Long ticketId, UUID cardNumber);
 
-    TicketFreeDto delete(Long id);
+    void delete(Long id);
 
-    TicketDto findTicket(Long id);
+    TicketBlockDto findTicket(Long id);
 
-    List<TicketFreeDto> findListFreeTickets(String specialization);
+    List<TicketFreeDto> findListFreeTickets(Specialization specialization, Long min, Long countDay);
 
-    List<TicketDto> findListBlockTickets(String specialization);
+    List<TicketBlockDto> findListBlockTickets(Specialization specialization);
 }

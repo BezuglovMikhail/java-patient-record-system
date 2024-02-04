@@ -1,0 +1,741 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2024-02-04T18:44:27.776Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.3",
+  "resources": [
+    {
+      "_id": "req_75f2bedef74c4467be3ab1c2687b9f8b",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706884038287,
+      "url": "http://localhost:8080/doctors",
+      "name": "Doctor_POST",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n\t\t\t\"lastName\": \"Петров\",\n  \t\t\"firstName\": \"Майк\",\n  \t\t\"patronymic\": \"Петрович\"\n\t},\t\n  \"specialization\": \"PAEDIATRICIAN\",\t\n  \"startWork\": \"10:00\",\t\n\t\"endWork\": \"15:00\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1300,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_0290664f60a143c39681301c07e604f2",
+      "parentId": null,
+      "modified": 1707072191111,
+      "created": 1706957310908,
+      "name": "PatientRecordSystem",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_427fa888214c4d8396e581fb55fb1a4d",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706888453078,
+      "url": "http://localhost:8080/doctors/b8773668-81a3-4497-bd68-6f34d6052325",
+      "name": "Doctor_GET_BY_ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6edcc6ed055e43168bcd4aa6f6d03ecb",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706889364756,
+      "url": "http://localhost:8080/doctors",
+      "name": "Doctor_GET_ALL",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_daa933d477314c06ac8437317c5690fd",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706891113131,
+      "url": "http://localhost:8080/doctors/75c9ad03-840f-4764-88ae-9ea0021bf86d",
+      "name": "Doctor_UPDATE",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n  \"firstName\": \"Петр\",\n  \"lastName\": \"Петров\",\n  \"patronymic\": \"Петрович\"\n\t},\n\t\n  \"specialization\": \"PAEDIATRICIAN\",\t\n  \"startWork\": \"10:00\",\t\n\t\"endWork\": \"17:00\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1400,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_44ae11d417db46728b9bb59fa7cbb44e",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706892675786,
+      "url": "http://localhost:8080/doctors/b8773668-81a3-4497-bd68-6f34d6052325",
+      "name": "Docnor_Delete",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 1600,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6703a3a0545745dfa9c687f82e5a6328",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706904992818,
+      "url": "http://localhost:8080/patients",
+      "name": "Patient_POST",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n\t\t\t\"lastName\": \"Васильев\",\n  \t\t\"firstName\": \"Николай\",\n  \t\t\"patronymic\": \"Маркович\"\n\t},\n\t\n  \"birthday\": \"1976-05-24\",\t\n  \"address\": \"Московская 17, дом 5, кв. 21\",\t\n\t\"locationNumber\": \"7\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d5799c8900d64dfdb8a7fb9019511a1c",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706906703857,
+      "url": "http://localhost:8080/patients/f7180486-0119-4805-9e01-1be67a78aa91",
+      "name": "Patient_GET_BY_ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 600,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_2bc2480f583c40ec90c790cead06405e",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706906990543,
+      "url": "http://localhost:8080/patients",
+      "name": "Patient_GET_ALL",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": 500,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_23cbb4d0ccdf476dbe62be9e0d07ef64",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706907091586,
+      "url": "http://localhost:8080/patients/7746e6e7-07ce-4b35-947d-df00ca1c8f29",
+      "name": "Patient_PATCH",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n  \"firstName\": \"Jktu\",\n  \"lastName\": \"Васильев\",\n  \"patronymic\": \"Маркович\"\n\t},\n\t\n  \"birthday\": \"1980-05-24\",\t\n  \"address\": \"Московская 17, дом 5, кв. 21\",\t\n\t\"locationNumber\": \"7\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1500,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4d2f0b4da9804b0ab33428f8c289e916",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706957428069,
+      "url": "http://localhost:8080/patients",
+      "name": "Patient_POST_2",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n  \t\"lastName\": \"Новиков\",\n\t\t\"firstName\": \"Максим\",  \n  \t\"patronymic\": \"Сергеевич\"\n\t},\n\t\n  \"birthday\": \"1986-10-20\",\t\n  \"address\": \"Московская 15, дом 10, кв. 6\",\t\n\t\"locationNumber\": \"7\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1200,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_58e806a609ee413e96b0019047c4981e",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706957604719,
+      "url": "http://localhost:8080/patients",
+      "name": "Patient_POST_3",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n  \t\"lastName\": \"Климов\",\n\t\t\"firstName\": \"Клим\",  \n  \t\"patronymic\": \"Климович\"\n\t},\n\t\n  \"birthday\": \"1996-09-09\",\t\n  \"address\": \"Бдюхера 22, дом 7, кв. 10\",\t\n\t\"locationNumber\": \"5\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 700,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_0a53aa6183e84652927cba6b0f43742e",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1706958104549,
+      "created": 1706957734964,
+      "url": "http://localhost:8080/doctors",
+      "name": "Doctor_POST_2",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n\t\t\t\"lastName\": \"Наумов\",\n  \t\t\"firstName\": \"Виктор\",\n  \t\t\"patronymic\": \"Степанович\"\n\t},\t\n  \"specialization\": \"PAEDIATRICIAN\",\t\n  \"startWork\": \"14:00\",\t\n\t\"endWork\": \"20:00\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 900,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_57c2f191ea9a4063b492a227b27eed7f",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1707043572894,
+      "created": 1706957786045,
+      "url": "http://localhost:8080/doctors",
+      "name": "Doctor_POST_3",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"fio\": {\n\t\t\t\"lastName\": \"Наумов\",\n  \t\t\"firstName\": \"Олег\",\n  \t\t\"patronymic\": \"Николаевич\"\n\t},\t\n  \"specialization\": \"OCULIST\",\t\n  \"startWork\": \"08:00\",\t\n\t\"endWork\": \"13:00\" \n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_582975b8ce7b4deca8560542f7bb2349",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1707047738623,
+      "created": 1707028908801,
+      "url": "http://localhost:8080/tickets/free",
+      "name": "Ticket_Free_Get",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_d02403205b924ce6a6b8ff23d4fc03ba",
+          "name": "Specialization",
+          "value": "PAEDIATRICIAN",
+          "description": ""
+        },
+        {
+          "id": "pair_93f9bd44a7f5469c8f40320a6ad85860",
+          "name": "min",
+          "value": "60",
+          "description": ""
+        },
+        {
+          "id": "pair_0b4836e9c4fc4b2f8e90d4b60cac8419",
+          "name": "countDay",
+          "value": "2",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "Insomnia/2023.5.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1707028908801,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_91647aed953e4e0097676893ef05c468",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1707071411170,
+      "created": 1707047753792,
+      "url": "http://localhost:8080/tickets",
+      "name": "Ticket_Post(Block_Save)",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\t\"id\": 3,\n\t\t\"doctor\": {\n\t\t\t\"fio\": {\n\t\t\t\t\"firstName\": \"Майк\",\n\t\t\t\t\"lastName\": \"Петров\",\n\t\t\t\t\"patronymic\": \"Петрович\"\n\t\t\t},\n\t\t\t\"id\": \"a8d50988-c4f5-4ee3-bc24-a4ccc8d058a5\",\n\t\t\t\"specialization\": \"PAEDIATRICIAN\"\n\t\t},\n\t\t\"startTime\": \"2024-02-05 12:00\",\n\t\t\"endTime\": \"2024-02-05 13:00\",\n\t\t\"ticketStatus\": \"UNBLOCK\"\n\t}"
+      },
+      "parameters": [
+        {
+          "id": "pair_ac3a7d0314564e3d908069c4e7ce74e4",
+          "name": "cartNumber",
+          "value": "2dede25b-b8ff-480b-85a6-10211080d72f",
+          "description": "",
+          "type": "text",
+          "multiline": false
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia/2023.5.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1707047753792,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_a60c82e4ab574fa58bb2f24c2cdd74d6",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1707070480561,
+      "created": 1707070404703,
+      "url": "http://localhost:8080/tickets/1",
+      "name": "Ticket_GET_BY_ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "Insomnia/2023.5.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1707070404703,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d54f51a23c724b74976f27ee93b53010",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1707070570034,
+      "created": 1707070489837,
+      "url": "http://localhost:8080/tickets/block",
+      "name": "Ticket_GET_All_Block",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "Insomnia/2023.5.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1707070489837,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cc35e9ca8ed14d9aaddaec4a0c3b71d4",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1707071462413,
+      "created": 1707070607287,
+      "url": "http://localhost:8080/tickets/1",
+      "name": "Ticket_UPDATE",
+      "description": "",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\t\"id\": 2,\n\t\t\"doctor\": {\n\t\t\t\"fio\": {\n\t\t\t\t\"firstName\": \"Майк\",\n\t\t\t\t\"lastName\": \"Петров\",\n\t\t\t\t\"patronymic\": \"Петрович\"\n\t\t\t},\n\t\t\t\"id\": \"a8d50988-c4f5-4ee3-bc24-a4ccc8d058a5\",\n\t\t\t\"specialization\": \"PAEDIATRICIAN\"\n\t\t},\n\t\t\"startTime\": \"2024-02-05 11:00\",\n\t\t\"endTime\": \"2024-02-05 12:00\",\n\t\t\"ticketStatus\": \"UNBLOCK\"\n\t}"
+      },
+      "parameters": [
+        {
+          "id": "pair_03a110f3db3942049026ce3aebf5eab9",
+          "name": "cartNumber",
+          "value": "2dede25b-b8ff-480b-85a6-10211080d72f",
+          "description": ""
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "User-Agent",
+          "value": "Insomnia/2023.5.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1707070607287,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d2aaab33d8c5497e91135aa6da51a8a3",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1707071322999,
+      "created": 1707071058769,
+      "url": "http://localhost:8080/tickets/1",
+      "name": "Ticket_DELETE",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "User-Agent",
+          "value": "Insomnia/2023.5.3"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1707071058769,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_2b97b0f42a1e41b98ecf0a1a33a6846d",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1675945330203,
+      "created": 1675945330203,
+      "name": "Base Environment",
+      "data": {},
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1675945330203,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_e134433270c84a1c9abf88831fd9e55d",
+      "parentId": "wrk_0290664f60a143c39681301c07e604f2",
+      "modified": 1675947045471,
+      "created": 1675945330205,
+      "name": "Default Jar",
+      "cookies": [
+        {
+          "key": "yandex_csyr",
+          "value": "1675934606",
+          "expires": "2033-02-06T12:23:26.000Z",
+          "domain": "ya.ru",
+          "path": "/",
+          "secure": true,
+          "hostOnly": false,
+          "creation": "2023-02-09T12:23:00.281Z",
+          "lastAccessed": "2023-02-09T12:23:00.282Z",
+          "id": "9790714068580124"
+        },
+        {
+          "key": "yandexuid",
+          "value": "3324627171675945405",
+          "expires": "2033-02-06T12:23:25.000Z",
+          "domain": "ya.ru",
+          "path": "/",
+          "hostOnly": false,
+          "creation": "2023-02-09T12:23:00.281Z",
+          "lastAccessed": "2023-02-09T12:23:00.281Z",
+          "id": "09204274914342103"
+        },
+        {
+          "key": "is_gdpr",
+          "value": "0",
+          "expires": "2025-02-08T12:23:25.000Z",
+          "domain": "ya.ru",
+          "path": "/",
+          "hostOnly": false,
+          "creation": "2023-02-09T12:23:00.281Z",
+          "lastAccessed": "2023-02-09T12:23:00.281Z",
+          "id": "8412913356057281"
+        },
+        {
+          "key": "is_gdpr_b",
+          "value": "CLqNMxDXpQEoAg==",
+          "expires": "2025-02-08T12:23:25.000Z",
+          "domain": "ya.ru",
+          "path": "/",
+          "hostOnly": false,
+          "creation": "2023-02-09T12:23:00.282Z",
+          "lastAccessed": "2023-02-09T12:23:00.282Z",
+          "id": "32936436898235466"
+        },
+        {
+          "key": "_yasc",
+          "value": "4la79ePz1jmrQd35FunsB8WvL3oBNINxuwS2CbvD3tSRHPSIHxNKmjI20E+d",
+          "expires": "2033-02-06T12:23:25.000Z",
+          "domain": "ya.ru",
+          "path": "/",
+          "secure": true,
+          "hostOnly": false,
+          "creation": "2023-02-09T12:23:00.282Z",
+          "lastAccessed": "2023-02-09T12:23:00.282Z",
+          "id": "3667555893409218"
+        },
+        {
+          "key": "i",
+          "value": "NF1znQkm/4woeGCcgSKTuu/LbqkT1pIOlMDz53+ysKjcya20DfdWG5ss+4sG6sf0LZeeYbiXEJVxpFlmwQJzYBxud7I=",
+          "expires": "2025-02-08T12:23:25.000Z",
+          "domain": "ya.ru",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "hostOnly": false,
+          "creation": "2023-02-09T12:23:00.282Z",
+          "lastAccessed": "2023-02-09T12:23:00.282Z",
+          "id": "8135968269587999"
+        },
+        {
+          "key": "yashr",
+          "value": "5441246141675945405",
+          "expires": "2024-02-09T12:23:25.000Z",
+          "domain": "ya.ru",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "hostOnly": false,
+          "creation": "2023-02-09T12:23:00.282Z",
+          "lastAccessed": "2023-02-09T12:23:00.282Z",
+          "id": "6655718273377476"
+        },
+        {
+          "key": "WMF-Last-Access",
+          "value": "09-Feb-2023",
+          "expires": "2023-03-13T12:00:00.000Z",
+          "domain": "en.wikipedia.org",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "hostOnly": true,
+          "creation": "2023-02-09T12:50:45.470Z",
+          "lastAccessed": "2023-02-09T12:50:45.470Z",
+          "id": "5907523544133049"
+        },
+        {
+          "key": "WMF-Last-Access-Global",
+          "value": "09-Feb-2023",
+          "expires": "2023-03-13T12:00:00.000Z",
+          "domain": "wikipedia.org",
+          "path": "/",
+          "secure": true,
+          "httpOnly": true,
+          "hostOnly": false,
+          "creation": "2023-02-09T12:50:45.470Z",
+          "lastAccessed": "2023-02-09T12:50:45.470Z",
+          "id": "29042869387370684"
+        },
+        {
+          "key": "GeoIP",
+          "value": "RU:SVE::56.85:60.61:v4",
+          "domain": "wikipedia.org",
+          "path": "/",
+          "secure": true,
+          "hostOnly": false,
+          "creation": "2023-02-09T12:50:45.470Z",
+          "lastAccessed": "2023-02-09T12:50:45.470Z",
+          "id": "11534425657986036"
+        }
+      ],
+      "_type": "cookie_jar"
+    }
+  ]
+}

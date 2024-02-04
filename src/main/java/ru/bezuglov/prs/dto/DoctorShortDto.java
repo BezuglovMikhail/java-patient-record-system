@@ -14,5 +14,7 @@ public class DoctorShortDto {
 
     private FIODto fio;
 
+    private UUID id;
+
     private Specialization specialization;
 }

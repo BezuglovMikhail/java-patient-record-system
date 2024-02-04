@@ -33,5 +33,5 @@ public class Ticket {
     private LocalDateTime endTime;
     //статус талона
     @Enumerated(EnumType.STRING)
-    private TicketStatus ticketStatus;
+    private TicketStatus status;
 }

@@ -17,5 +17,4 @@ public class FIO {
     private String lastName;
     //Отчество
     private String patronymic;
-
 }

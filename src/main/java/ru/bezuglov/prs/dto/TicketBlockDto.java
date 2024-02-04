@@ -1,5 +1,6 @@
 package ru.bezuglov.prs.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,18 +11,20 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TicketDto {
+public class TicketBlockDto {
 
     private Long id;
 
-    private DoctorShortDto doctor;
+    private DoctorDto doctor;
 
-    private PatientShortDto patient;
+    private PatientDto patient;
 
     //начало приема
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime startTime;
 
     //конец приема
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime endTime;
 
     private TicketStatus ticketStatus;

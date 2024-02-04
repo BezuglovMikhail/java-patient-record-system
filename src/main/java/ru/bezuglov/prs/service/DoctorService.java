@@ -11,7 +11,7 @@ public interface DoctorService {
 
     DoctorShortDto save(DoctorNewDto newDoctorDto);
 
-    List<DoctorShortDto> findListDoctors(String specialization);
+    List<DoctorShortDto> findListDoctors();
 
     DoctorDto findDoctor(UUID personnelNumber);
 

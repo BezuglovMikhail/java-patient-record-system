@@ -13,5 +13,7 @@ public class PatientShortDto {
 
     private FIODto fio;
 
+    private UUID id;
+
     private Integer locationNumber;
 }

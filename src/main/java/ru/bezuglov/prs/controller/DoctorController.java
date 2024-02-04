@@ -1,6 +1,5 @@
 package ru.bezuglov.prs.controller;
 
-import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,8 +29,8 @@ public class DoctorController {
     }
 
     @GetMapping()
-    public List<DoctorShortDto> getListDoctors(@RequestParam(required = false) String specialization) {
-        List<DoctorShortDto> doctor = doctorService.findListDoctors(specialization);
+    public List<DoctorShortDto> getListDoctors() {
+        List<DoctorShortDto> doctor = doctorService.findListDoctors();
         log.info("Find listDoctors");
         return doctor;
     }

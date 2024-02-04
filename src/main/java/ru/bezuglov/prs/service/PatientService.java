@@ -18,5 +18,4 @@ public interface PatientService {
     PatientDto findPatient(UUID cardNumber);
 
     List<PatientShortDto> findListPatients();
-
 }
