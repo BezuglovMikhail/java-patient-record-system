@@ -1,12 +1,13 @@
 package ru.bezuglov.prs.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.bezuglov.prs.dto.DoctorDto;
 import ru.bezuglov.prs.dto.TicketBlockDto;
 import ru.bezuglov.prs.dto.TicketFreeDto;
+import ru.bezuglov.prs.gs_ws.TicketFree;
 import ru.bezuglov.prs.model.Doctor;
 import ru.bezuglov.prs.model.Patient;
 import ru.bezuglov.prs.model.Ticket;
+import ru.bezuglov.prs.dto.DoctorDto;
 import ru.bezuglov.prs.until.TicketStatus;
 
 import java.time.LocalDateTime;
@@ -72,6 +73,17 @@ public class TicketMapper {
         ticketBlock.setStartTime(ticket.getStartTime());
         ticketBlock.setEndTime(ticket.getEndTime());
         return ticketBlock;
+    }
+
+    public TicketFree toTicketFree(TicketFreeDto ticketFreeDto) {
+        TicketFree ticketFree = new TicketFree();
+        ticketFree.setTicketId(ticketFreeDto.getId());
+        ticketFree.setFirstName(ticketFreeDto.getDoctor().getFio().getFirstName());
+        ticketFree.setLastName(ticketFreeDto.getDoctor().getFio().getLastName());
+        ticketFree.setPatronymic(ticketFreeDto.getDoctor().getFio().getPatronymic());
+        ticketFree.setDay(ticketFreeDto.getStartTime().toLocalDate().toString());
+        ticketFree.setStartTime(ticketFreeDto.getStartTime().toLocalTime().toString());
+        return ticketFree;
     }
 
     public Ticket toUpdateTicket(TicketFreeDto updateTicketTicket, Ticket oldTicket, Doctor doctor, Patient patient) {

@@ -1,8 +1,11 @@
 package ru.bezuglov.prs.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.bezuglov.prs.dto.*;
+import ru.bezuglov.prs.dto.PatientDto;
+import ru.bezuglov.prs.dto.PatientNewDto;
+import ru.bezuglov.prs.dto.PatientShortDto;
 import ru.bezuglov.prs.model.Patient;
+
 
 import java.util.ArrayList;
 import java.util.List;

@@ -14,6 +14,17 @@ public enum Specialization {
         this.title = title;
     }
 
+    public static Specialization fromString(String value) {
+        if (value != null) {
+            for(Specialization sp : Specialization.values()) {
+                if (value.equalsIgnoreCase(sp.name())) {
+                    return sp;
+                }
+            }
+        }
+        throw new RuntimeException();
+    }
+
     public String getTitle() {
         return title;
     }

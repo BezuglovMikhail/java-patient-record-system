@@ -1,5 +1,5 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.bezuglov.ru/prs/gs-ws"
-           targetNamespace="http://www.bezuglov.ru/prs/gs-ws" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.bezuglov.ru/ticket-ws"
+           targetNamespace="http://www.bezuglov.ru/ticket-ws" elementFormDefault="qualified">
 
     <xs:element name="getTicketsByLastNameAndSpecializationRequest">
         <xs:complexType>
@@ -11,24 +11,25 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:element name="getTicketsByLastNameAndSpecializationResponse">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="ticketFreeList" type="tns:ticketFreeList" maxOccurs="unbounded"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-    <xs:complexType name="ticketFreeList">
+    <xs:complexType name="ticketFree">
         <xs:sequence>
             <xs:element name="ticketId" type="xs:long"/>
             <xs:element name="firstName" type="xs:string"/>
             <xs:element name="lastName" type="xs:string"/>
             <xs:element name="patronymic" type="xs:string"/>
-            <xs:element name="startTime" type="xs:dateTime"/>
-            <xs:element name="endTime" type="xs:dateTime"/>
+            <xs:element name="day" type="xs:string"/>
+            <xs:element name="startTime" type="xs:string"/>
+            <xs:element name="endTime" type="xs:string"/>
             <xs:element name="ticketStatus" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+    <xs:element name="getTicketsByLastNameAndSpecializationResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ticketFree" type="tns:ticketFree" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
     <xs:complexType name="serviceStatus">
         <xs:sequence>
             <xs:element name="statusCode" type="xs:string"/>

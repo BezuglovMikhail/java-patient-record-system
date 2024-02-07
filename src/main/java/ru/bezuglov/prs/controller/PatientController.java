@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.bezuglov.prs.dto.*;
+import ru.bezuglov.prs.dto.PatientDto;
+import ru.bezuglov.prs.dto.PatientNewDto;
+import ru.bezuglov.prs.dto.PatientShortDto;
 import ru.bezuglov.prs.service.PatientService;
 
 import java.util.List;
