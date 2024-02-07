@@ -1,0 +1,113 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.bezuglov.ru/ticket-ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.bezuglov.ru/ticket-ws" targetNamespace="http://www.bezuglov.ru/ticket-ws">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.bezuglov.ru/ticket-ws">
+            <xs:element name="GetTicketByIdRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ticketId" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="GetTicketByIdResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ticketBlock" type="tns:ticketBlock"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="ticketBlock">
+                <xs:sequence>
+                    <xs:element name="ticketId" type="xs:long"/>
+                    <xs:element name="doctorLastName" type="xs:string"/>
+                    <xs:element name="patientLastName" type="xs:string"/>
+                    <xs:element name="startTime" type="xs:string"/>
+                    <xs:element name="endTime" type="xs:string"/>
+                    <xs:element name="ticketStatus" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="GetTicketsByLastNameAndSpecializationRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="specialization" type="xs:string"/>
+                        <xs:element name="doctorLastName" type="xs:string"/>
+                        <xs:element name="min" type="xs:long"/>
+                        <xs:element name="day" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="ticketFree">
+                <xs:sequence>
+                    <xs:element name="ticketId" type="xs:long"/>
+                    <xs:element name="firstName" type="xs:string"/>
+                    <xs:element name="lastName" type="xs:string"/>
+                    <xs:element name="patronymic" type="xs:string"/>
+                    <xs:element name="specialization" type="xs:string"/>
+                    <xs:element name="startTime" type="xs:string"/>
+                    <xs:element name="endTime" type="xs:string"/>
+                    <xs:element name="ticketStatus" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="GetTicketsByLastNameAndSpecializationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="ticketFree" type="tns:ticketFree"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:complexType name="serviceStatus">
+                <xs:sequence>
+                    <xs:element name="statusCode" type="xs:string"/>
+                    <xs:element name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="GetTicketByIdResponse">
+        <wsdl:part element="tns:GetTicketByIdResponse" name="GetTicketByIdResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetTicketsByLastNameAndSpecializationRequest">
+        <wsdl:part element="tns:GetTicketsByLastNameAndSpecializationRequest" name="GetTicketsByLastNameAndSpecializationRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetTicketByIdRequest">
+        <wsdl:part element="tns:GetTicketByIdRequest" name="GetTicketByIdRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="GetTicketsByLastNameAndSpecializationResponse">
+        <wsdl:part element="tns:GetTicketsByLastNameAndSpecializationResponse" name="GetTicketsByLastNameAndSpecializationResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="TicketPort">
+        <wsdl:operation name="GetTicketById">
+            <wsdl:input message="tns:GetTicketByIdRequest" name="GetTicketByIdRequest"> </wsdl:input>
+            <wsdl:output message="tns:GetTicketByIdResponse" name="GetTicketByIdResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetTicketsByLastNameAndSpecialization">
+            <wsdl:input message="tns:GetTicketsByLastNameAndSpecializationRequest" name="GetTicketsByLastNameAndSpecializationRequest"> </wsdl:input>
+            <wsdl:output message="tns:GetTicketsByLastNameAndSpecializationResponse" name="GetTicketsByLastNameAndSpecializationResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="TicketPortSoap11" type="tns:TicketPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="GetTicketById">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="GetTicketByIdRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetTicketByIdResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetTicketsByLastNameAndSpecialization">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="GetTicketsByLastNameAndSpecializationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="GetTicketsByLastNameAndSpecializationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="TicketPortService">
+        <wsdl:port binding="tns:TicketPortSoap11" name="TicketPortSoap11">
+            <soap:address location="http://localhost:8080/ws"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
