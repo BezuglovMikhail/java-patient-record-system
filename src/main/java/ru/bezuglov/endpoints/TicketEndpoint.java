@@ -10,7 +10,6 @@ import ru.bezuglov.dto.TicketBlockDto;
 import ru.bezuglov.dto.TicketFreeDto;
 import ru.bezuglov.gs_ws.*;
 import ru.bezuglov.mapper.TicketMapper;
-import ru.bezuglov.repository.TicketRepository;
 import ru.bezuglov.service.TicketService;
 import ru.bezuglov.until.Specialization;
 
@@ -33,8 +32,6 @@ private static final String NAMESPACE_URI = "http://www.bezuglov.ru/ticket-ws";
 
         ticketBlock = TicketMapper.toTicketBlock(ticketBlockDto);
         response.setTicketBlock(ticketBlock);
-
-        //BeanUtils.copyProperties(ticketService.findTicket(request.getValue().getId()), ticketBlock);
 
         return response;
     }
