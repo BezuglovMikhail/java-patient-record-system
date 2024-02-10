@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS doctors (
   specialization VARCHAR(255) NOT NULL,
   start_work TIME WITHOUT TIME ZONE,
   end_work TIME WITHOUT TIME ZONE,
-  CONSTRAINT pk_doctor PRIMARY KEY (id)
+  CONSTRAINT pk_doctor PRIMARY KEY (id),
+  CONSTRAINT uq_doctors_for_first_name_last_name_patronymic_specialization
+  UNIQUE (first_name, last_name, patronymic, specialization)
 );
 
 CREATE TABLE IF NOT EXISTS patients (
@@ -19,7 +21,9 @@ CREATE TABLE IF NOT EXISTS patients (
   birthday date NOT NULL,
   address VARCHAR(255) NOT NULL,
   location_number INTEGER NOT NULL,
-  CONSTRAINT pk_patient PRIMARY KEY (id)
+  CONSTRAINT pk_patient PRIMARY KEY (id),
+  CONSTRAINT uq_patients_for_first_name_last_name_patronymic_birthday
+  UNIQUE (first_name, last_name, patronymic, birthday)
 );
 
 CREATE TABLE IF NOT EXISTS tickets (
@@ -31,6 +35,6 @@ CREATE TABLE IF NOT EXISTS tickets (
   status VARCHAR(255),
   CONSTRAINT pk_ticket PRIMARY KEY (id),
   CONSTRAINT fk_ticket_for_doctor FOREIGN KEY (doctor_id) REFERENCES doctors (id),
-  CONSTRAINT fk_ticket_for_patient FOREIGN KEY (patient_id) REFERENCES patients (id)
+  CONSTRAINT fk_ticket_for_patient FOREIGN KEY (patient_id) REFERENCES patients (id),
+  CONSTRAINT uq_tickets_for_doctor_id_patient_id_start_time UNIQUE (doctor_id, patient_id, start_time)
 );
-
