@@ -1,23 +1,34 @@
 package ru.bezuglov.service;
 
-import ru.bezuglov.dto.TicketBlockDto;
+import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
-import ru.bezuglov.until.Specialization;
+import ru.bezuglov.until.TicketStatus;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
 public interface TicketService {
 
-    TicketBlockDto save(TicketFreeDto ticketFreeDto, UUID cartNumber);
+    TicketDto save(Long ticketId, UUID cartNumber);
 
-    TicketBlockDto update(TicketFreeDto ticketUpdate, Long ticketId, UUID cardNumber);
+    TicketDto update(TicketFreeDto ticketUpdate, Long ticketId, UUID cardNumber);
 
     void delete(Long id);
 
-    TicketBlockDto findTicket(Long id);
+    TicketDto findTicket(Long id);
 
-    List<TicketFreeDto> findListFreeTickets(Specialization specialization, Long min, Long countDay);
+    TicketFreeDto findTicketFree(Long id);
 
-    List<TicketBlockDto> findListBlockTickets(Specialization specialization);
+    List<TicketFreeDto> findListFreeTickets(Integer countTickets, Integer min, LocalDate dayStart);
+
+    List<TicketDto> findTicketsBlockList(TicketStatus status);
+
+    List<TicketFreeDto> findTicketsFreeList(TicketStatus status);
+
+    List<TicketDto> findAllTicketsByPatientId(Long patientId);
+
+    List<TicketDto> findAllTicketsByPatientCardNumber(UUID cardNumber);
+
+    List<TicketFreeDto> findFreeTicketsByDoctorIdForDay(Long doctorId, LocalDate day);
 }

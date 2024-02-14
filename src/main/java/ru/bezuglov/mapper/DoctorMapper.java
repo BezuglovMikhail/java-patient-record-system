@@ -15,6 +15,7 @@ public class DoctorMapper {
     public DoctorDto toDoctorDto(Doctor doctor) {
         DoctorDto doctorDto = new DoctorDto();
         doctorDto.setId(doctor.getId());
+        doctorDto.setPersonalNumber(doctor.getPersonalNumber());
         doctorDto.setFio(FIOMapper.toFIODto(doctor.getFio()));
         doctorDto.setSpecialization(doctor.getSpecialization());
         doctorDto.setStartWork(doctor.getStartWork());
@@ -24,16 +25,16 @@ public class DoctorMapper {
 
     public DoctorShortDto toDoctorShortDto(Doctor doctor) {
         DoctorShortDto doctorShortDto = new DoctorShortDto();
-        doctorShortDto.setFio(FIOMapper.toFIODto(doctor.getFio()));
         doctorShortDto.setId(doctor.getId());
+        doctorShortDto.setFio(FIOMapper.toFIODto(doctor.getFio()));
         doctorShortDto.setSpecialization(doctor.getSpecialization());
         return doctorShortDto;
     }
 
     public DoctorShortDto toDoctorShortDto(DoctorDto doctor) {
         DoctorShortDto doctorShortDto = new DoctorShortDto();
-        doctorShortDto.setFio(doctor.getFio());
         doctorShortDto.setId(doctor.getId());
+        doctorShortDto.setFio(doctor.getFio());
         doctorShortDto.setSpecialization(doctor.getSpecialization());
         return doctorShortDto;
     }
@@ -41,6 +42,7 @@ public class DoctorMapper {
     public Doctor toDoctor(DoctorDto doctorDto) {
         Doctor doctor = new Doctor();
         doctor.setId(doctorDto.getId());
+        doctor.setPersonalNumber(doctorDto.getPersonalNumber());
         doctor.setFio(FIOMapper.toFIO(doctorDto.getFio()));
         doctor.setSpecialization(doctorDto.getSpecialization());
         doctor.setStartWork(doctorDto.getStartWork());
@@ -60,6 +62,7 @@ public class DoctorMapper {
     public Doctor toUpdateDto(DoctorNewDto updateDoctor, Doctor oldDoctor) {
         Doctor newDoctor = new Doctor();
         newDoctor.setId(oldDoctor.getId());
+        newDoctor.setPersonalNumber(oldDoctor.getPersonalNumber());
         newDoctor.setFio(!updateDoctor.getFio().equals(oldDoctor.getFio())
                 ? FIOMapper.toFIO(updateDoctor.getFio())
                 : oldDoctor.getFio());

@@ -35,10 +35,10 @@ public class DoctorController {
         return doctor;
     }
 
-    @GetMapping("/{uuid}")
-    public DoctorDto getDoctor(@PathVariable("uuid") UUID uuid) {
-        DoctorDto doctor = doctorService.findDoctor(uuid);
-        log.info("Find doctor whit personnelNumber = {}", uuid);
+    @GetMapping("/{id}")
+    public DoctorDto getDoctor(@PathVariable("id") Long id) {
+        DoctorDto doctor = doctorService.findDoctor(id);
+        log.info("Find doctor whit personnelNumber = {}", id);
         return doctor;
     }
 

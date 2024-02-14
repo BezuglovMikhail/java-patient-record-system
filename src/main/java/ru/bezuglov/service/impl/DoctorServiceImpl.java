@@ -31,18 +31,24 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDto findDoctor(UUID uuid) {
-        return DoctorMapper.toDoctorDto(doctorRepository.getReferenceById(uuid));
+    public DoctorDto findDoctor(UUID personalNumber) {
+        return DoctorMapper.toDoctorDto(doctorRepository.findByPersonalNumber(personalNumber));
     }
 
     @Override
-    public void delete(UUID uuid) {
-        doctorRepository.deleteById(uuid);
+    public DoctorDto findDoctor(Long id) {
+        return DoctorMapper.toDoctorDto(doctorRepository.getReferenceById(id));
     }
 
     @Override
-    public DoctorDto update(DoctorNewDto doctorUpdate, UUID uuid) {
-        Doctor oldDoctor = doctorRepository.getReferenceById(uuid);
+    public void delete(UUID personalNumber) {
+        Doctor deleteDoctor = doctorRepository.findByPersonalNumber(personalNumber);
+        doctorRepository.deleteById(deleteDoctor.getId());
+    }
+
+    @Override
+    public DoctorDto update(DoctorNewDto doctorUpdate, UUID personalNumber) {
+        Doctor oldDoctor = doctorRepository.findByPersonalNumber(personalNumber);
         return DoctorMapper.toDoctorDto(doctorRepository.save(DoctorMapper.toUpdateDto(doctorUpdate, oldDoctor)));
     }
 }

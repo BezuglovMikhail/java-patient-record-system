@@ -17,9 +17,13 @@ import java.util.UUID;
 public class Doctor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    //табельный номер
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id", insertable = false, updatable = false, nullable = false)
-    private UUID id;
+    @Column(name="personal_number", insertable = false, updatable = false, nullable = false)
+    private UUID personalNumber;
 
     //ФИО
     @Embedded

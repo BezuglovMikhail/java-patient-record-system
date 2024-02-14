@@ -34,12 +34,6 @@ public class ErrorHandler {
     private static final String INCORRECTLY_MADE_REQUEST = "Incorrectly made request.";
     private static final String CONSTRAIN_EXCEPTION = "Constraint exception";
 
-    @ExceptionHandler(NotFoundException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handlerNotFoundException(NotFoundException e, WebRequest request) {
-        return makeApiError(e.getReason(), e, NOT_FOUND, request);
-    }
-
     @ExceptionHandler()
     @ResponseStatus(INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handlerThrowable(Throwable e, WebRequest request) {

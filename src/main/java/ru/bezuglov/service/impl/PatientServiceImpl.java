@@ -28,19 +28,26 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientShortDto update(PatientNewDto patientUpdate, UUID uuid) {
-        Patient oldPatient = patientRepository.getReferenceById(uuid);
+        Patient oldPatient = patientRepository.findByCardNumber(uuid);
         return PatientMapper.toPatientShortDto(patientRepository.save(PatientMapper
                 .toUpdatePatientDto(patientUpdate, oldPatient)));
     }
 
     @Override
     public void delete(UUID cartNumber) {
-        patientRepository.deleteById(cartNumber);
+        Patient deletePatient = patientRepository.findByCardNumber(cartNumber);
+        patientRepository.getReferenceById(deletePatient.getId());
+        patientRepository.deleteById(deletePatient.getId());
     }
 
     @Override
     public PatientDto findPatient(UUID cardNumber) {
-        return PatientMapper.toPatientDto(patientRepository.getReferenceById(cardNumber));
+        return PatientMapper.toPatientDto(patientRepository.findByCardNumber(cardNumber));
+    }
+
+    @Override
+    public PatientDto findPatient(Long id) {
+        return PatientMapper.toPatientDto(patientRepository.getReferenceById(id));
     }
 
     @Override

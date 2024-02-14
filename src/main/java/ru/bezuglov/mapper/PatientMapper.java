@@ -15,6 +15,7 @@ public class PatientMapper {
     public PatientDto toPatientDto(Patient patient) {
         PatientDto patientDto = new PatientDto();
         patientDto.setId(patient.getId());
+        patientDto.setCardNumber(patient.getCardNumber());
         patientDto.setFio(FIOMapper.toFIODto(patient.getFio()));
         patientDto.setBirthday(patient.getBirthday());
         patientDto.setAddress(patient.getAddress());
@@ -24,8 +25,8 @@ public class PatientMapper {
 
     public PatientShortDto toPatientShortDto(Patient patient) {
         PatientShortDto patientShortDto = new PatientShortDto();
-        patientShortDto.setFio(FIOMapper.toFIODto(patient.getFio()));
         patientShortDto.setId(patient.getId());
+        patientShortDto.setFio(FIOMapper.toFIODto(patient.getFio()));
         patientShortDto.setLocationNumber(patient.getLocationNumber());
         return patientShortDto;
     }
@@ -36,15 +37,6 @@ public class PatientMapper {
         patient.setBirthday(patientNewDto.getBirthday());
         patient.setAddress(patientNewDto.getAddress());
         patient.setLocationNumber(patientNewDto.getLocationNumber());
-        return patient;
-    }
-
-    public Patient toPatient(PatientDto patientDto) {
-        Patient patient = new Patient();
-        patient.setFio(FIOMapper.toFIO(patientDto.getFio()));
-        patient.setBirthday(patientDto.getBirthday());
-        patient.setAddress(patientDto.getAddress());
-        patient.setLocationNumber(patientDto.getLocationNumber());
         return patient;
     }
 
