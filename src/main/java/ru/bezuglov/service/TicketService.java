@@ -2,6 +2,8 @@ package ru.bezuglov.service;
 
 import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
+import ru.bezuglov.gs_ws.TicketBlock;
+import ru.bezuglov.gs_ws.TicketFree;
 import ru.bezuglov.until.TicketStatus;
 
 import java.time.LocalDate;

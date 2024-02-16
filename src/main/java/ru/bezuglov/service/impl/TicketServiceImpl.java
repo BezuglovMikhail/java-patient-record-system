@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
+import ru.bezuglov.gs_ws.TicketBlock;
+import ru.bezuglov.gs_ws.TicketFree;
 import ru.bezuglov.mapper.TicketMapper;
 import ru.bezuglov.model.Doctor;
 import ru.bezuglov.model.Patient;
@@ -13,7 +15,6 @@ import ru.bezuglov.repository.DoctorRepository;
 import ru.bezuglov.repository.PatientRepository;
 import ru.bezuglov.repository.TicketRepository;
 import ru.bezuglov.service.TicketService;
-import ru.bezuglov.until.Specialization;
 import ru.bezuglov.until.TicketStatus;
 
 import java.time.LocalDate;
@@ -59,9 +60,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketDto findTicket(Long id) {
-       Ticket ticket = ticketRepository.getReferenceById(id);
-        return TicketMapper.toTicketDto(ticket);
+    public TicketDto findTicket(Long ticketId) {
+        TicketDto ticket = TicketMapper.toTicketDto(ticketRepository.getReferenceById(ticketId));
+       return ticket;
     }
 
     @Override
@@ -69,7 +70,7 @@ public class TicketServiceImpl implements TicketService {
         return TicketMapper.toTicketFreeDto(ticketRepository.getReferenceById(id));
     }
 
-    private List<TicketFreeDto> saveTicket(List<Ticket> ticketFreeList) {
+    private List<TicketFreeDto> saveFreeTicketsList(List<Ticket> ticketFreeList) {
         return TicketMapper.toTicketFreeDtoList(ticketRepository.saveAll(ticketFreeList));
     }
 
@@ -87,7 +88,7 @@ public class TicketServiceImpl implements TicketService {
             ticketFreeList.addAll(TicketMapper.toTicketList(countTickets, min, dayStart,
                     doctor, ticketBlockList, ticketFreeDtoList));
         }
-        return saveTicket(ticketFreeList);
+        return saveFreeTicketsList(ticketFreeList);
     }
 
     @Override

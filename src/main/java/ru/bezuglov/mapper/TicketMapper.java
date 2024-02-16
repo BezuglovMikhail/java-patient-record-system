@@ -1,14 +1,13 @@
 package ru.bezuglov.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.bezuglov.dto.DoctorDto;
 import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
 import ru.bezuglov.gs_ws.TicketBlock;
+import ru.bezuglov.gs_ws.TicketFree;
 import ru.bezuglov.model.Doctor;
 import ru.bezuglov.model.Patient;
 import ru.bezuglov.model.Ticket;
-import ru.bezuglov.gs_ws.TicketFree;
 import ru.bezuglov.until.TicketStatus;
 
 import java.time.LocalDate;
@@ -29,31 +28,37 @@ public class TicketMapper {
         return ticketBlock;
     }
 
-    public List<Ticket> toTicketList(Integer countTickets, Integer min, LocalDate dayStart, Doctor doctor, List<TicketDto> ticketsBlock,
-                                     List<TicketFreeDto> ticketsFree) {
+    public List<Ticket> toTicketList(Integer countTickets, Integer min, LocalDate dayStart, Doctor doctor,
+                                     List<TicketDto> ticketsBlock, List<TicketFreeDto> ticketsFree) {
         List<Ticket> ticketFreeList = new ArrayList<>();
         LocalDateTime nowDay = LocalDateTime.now();
-        List<LocalDateTime> ticketStartTimes = ticketsBlock.stream().map(e -> e.getStartTime())
+        List<LocalDateTime> ticketStartTimes = ticketsBlock.stream().map(TicketDto::getStartTime)
                 .collect(Collectors.toList());
-        ticketStartTimes.addAll(ticketsFree.stream().map(e -> e.getStartTime()).collect(Collectors.toList()));
-        List<LocalDateTime> ticketEndTimes = ticketsBlock.stream().map(e -> e.getEndTime())
+        ticketStartTimes.addAll(ticketsFree.stream().map(TicketFreeDto::getStartTime).toList());
+        List<LocalDateTime> ticketEndTimes = ticketsBlock.stream().map(TicketDto::getEndTime)
                 .collect(Collectors.toList());
-        ticketEndTimes.addAll(ticketsFree.stream().map(e -> e.getEndTime()).collect(Collectors.toList()));
+        ticketEndTimes.addAll(ticketsFree.stream().map(TicketFreeDto::getEndTime).toList());
 
-        for (int i = 0; i < countTickets; i++) {
+        int count = 0;
+
+        for (int i = 0; count < countTickets; i++) {
             LocalDateTime start;
-            LocalDateTime startCheck = LocalDateTime.of(dayStart, doctor.getEndWork());
+            //LocalDateTime startCheck = LocalDateTime.of(dayStart, doctor.getEndWork());
 
-            if (i == 0 && startCheck.isAfter(LocalDateTime.now()) ) {
-                start = LocalDateTime.now();
+            if (i == 0 && LocalDateTime.of(dayStart, doctor.getEndWork()).isAfter(LocalDateTime.now())
+                    && LocalDateTime.of(dayStart, doctor.getStartWork()).isBefore(LocalDateTime.now())) {
+                start = LocalDateTime.now().plusMinutes(10);
+            } else if (i == 0 && LocalDateTime.now().isBefore(LocalDateTime.of(dayStart, doctor.getStartWork()))) {
+                start = LocalDateTime.of(dayStart, doctor.getStartWork());
             } else {
                 nowDay = nowDay.plusDays(1);
                 start = LocalDateTime.of(nowDay.toLocalDate(), doctor.getStartWork());
             }
-            for (LocalDateTime startTime = start; startTime.toLocalTime()
-                    .isBefore(doctor.getEndWork());
+            for (LocalDateTime startTime = start;
+                 startTime.toLocalTime().isBefore(doctor.getEndWork()) && count < countTickets;
                  startTime = startTime.plusMinutes(min)) {
                 if (!ticketStartTimes.contains(startTime)
+                        && startTime.toLocalTime().plusMinutes(min - 1).isBefore(doctor.getEndWork())
                         && !ticketEndTimes.contains(startTime.minusMinutes(1))) {
                     Ticket ticketFree = new Ticket();
                     ticketFree.setStatus(TicketStatus.UNBLOCK);
@@ -61,6 +66,7 @@ public class TicketMapper {
                     ticketFree.setStartTime(startTime);
                     ticketFree.setEndTime(startTime.plusMinutes(min));
                     ticketFreeList.add(ticketFree);
+                    count++;
                 }
             }
         }
@@ -79,7 +85,19 @@ public class TicketMapper {
         return ticketDto;
     }
 
-    public TicketBlock toTicketBlock(TicketDto ticket) {
+    public TicketFree toTicketGetSoap(TicketDto ticket) {
+        TicketFree ticketFree = new TicketFree();
+        ticketFree.setTicketId(ticket.getId());
+        ticketFree.setFirstName(ticket.getDoctor().getFio().getFirstName());
+        ticketFree.setLastName(ticket.getDoctor().getFio().getLastName());
+        ticketFree.setPatronymic(ticket.getDoctor().getFio().getPatronymic());
+        ticketFree.setStartTime(ticket.getStartTime().format(formatter).toString());
+        ticketFree.setEndTime(ticket.getEndTime().format(formatter).toString());
+        ticketFree.setTicketStatus(TicketStatus.BLOCK.name());
+        return ticketFree;
+    }
+
+    /*public TicketBlock toTicketGetSoap(Ticket ticket) {
         TicketBlock ticketBlock = new TicketBlock();
         ticketBlock.setTicketId(ticket.getId());
         ticketBlock.setDoctorLastName(ticket.getDoctor().getFio().getLastName());
@@ -88,7 +106,7 @@ public class TicketMapper {
         ticketBlock.setEndTime(ticket.getEndTime().format(formatter).toString());
         ticketBlock.setTicketStatus(TicketStatus.BLOCK.name());
         return ticketBlock;
-    }
+    }*/
 
     public TicketFree toTicketFree(TicketFreeDto ticketFreeDto) {
         TicketFree ticketFree = new TicketFree();
