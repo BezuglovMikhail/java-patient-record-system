@@ -1,0 +1,8 @@
+name: API Tests
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    uses: bezuglov/java-patient-record-system/.github/workflows/api-tests.yml@ci
