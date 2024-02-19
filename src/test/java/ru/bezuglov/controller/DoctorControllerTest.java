@@ -82,9 +82,10 @@ class DoctorControllerTest {
 
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id", is(doctorShortDto.getId()), Long.class))
-                .andExpect(jsonPath("$.fio", is(doctorShortDto.getFio()), FIODto.class))
+                //.andExpect(jsonPath("$.fio", is(doctorShortDto.getFio()), FIODto.class))
                 .andExpect(jsonPath("$.specialization", is(doctorShortDto.getSpecialization().toString()),
-                        Specialization.class));
+                        Specialization.class))
+                .andExpect(jsonPath("$.fio", is(doctorShortDto.getFio()), FIODto.class));
 
         //Mockito.verify(doctorService, Mockito.times(1))
          //       .save(doctorNewDto);
