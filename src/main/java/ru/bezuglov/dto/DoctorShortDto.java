@@ -19,8 +19,8 @@ public class DoctorShortDto {
     @Override
     public String toString() {
         return "DoctorShortDto{" +
-                "id=" + id +
-                ", fio=" + fio +
+                "fio=" + fio +
+                ", id=" + id +
                 ", specialization=" + specialization +
                 '}';
     }
