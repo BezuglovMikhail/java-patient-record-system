@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
     - main
-    - dev
+    - develop
 
 # Работа, которая будет выполняться: сборка (build) и тестирование проекта. Будут запущены на виртуальной машине linux (ubuntu)
 jobs:
