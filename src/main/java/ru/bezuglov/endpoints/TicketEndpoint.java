@@ -6,14 +6,14 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import ru.bezuglov.dto.TicketBlockDto;
+import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
 import ru.bezuglov.gs_ws.*;
 import ru.bezuglov.mapper.TicketMapper;
-import ru.bezuglov.repository.TicketRepository;
 import ru.bezuglov.service.TicketService;
-import ru.bezuglov.until.Specialization;
+import ru.bezuglov.until.TicketStatus;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,30 +27,34 @@ private static final String NAMESPACE_URI = "http://www.bezuglov.ru/ticket-ws";
     @ResponsePayload
     public GetTicketByIdResponse getTicketById(@RequestPayload GetTicketByIdRequest request) {
         GetTicketByIdResponse response = new GetTicketByIdResponse();
-        TicketBlock ticketBlock = new TicketBlock();
+        //TicketFree ticketFree = new TicketFree();
 
-        TicketBlockDto ticketBlockDto = ticketService.findTicket(request.getTicketId());
+        TicketFree ticketFree = TicketMapper.toTicketGetSoap(ticketService.findTicket(request.getTicketId()));
 
-        ticketBlock = TicketMapper.toTicketBlock(ticketBlockDto);
-        response.setTicketBlock(ticketBlock);
-
-        //BeanUtils.copyProperties(ticketService.findTicket(request.getValue().getId()), ticketBlock);
+        //ticketFree = TicketMapper.toTicketFree(ticketFreeDto);
+        //BeanUtils.copyProperties(TicketMapper.toTicketFree(ticketFreeDto), ticketFree);
+        response.setTicketFree(ticketFree);
 
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetTicketsByLastNameAndSpecializationRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "GetFreeTicketsRequest")
     @ResponsePayload
-    public GetTicketsByLastNameAndSpecializationResponse getTicketsByLastNameAndSpecialization(@RequestPayload GetTicketsByLastNameAndSpecializationRequest request) {
-        GetTicketsByLastNameAndSpecializationResponse response = new GetTicketsByLastNameAndSpecializationResponse();
+    public GetFreeTicketsResponse getFreeTickets(@RequestPayload GetFreeTicketsRequest request) {
+        GetFreeTicketsResponse response = new GetFreeTicketsResponse();
         List<TicketFree> ticketFreeList = new ArrayList<>();
-        List<TicketFreeDto> ticketList = ticketService.findListFreeTickets(Specialization
-                .fromString(request.getSpecialization()), request.getMin(), request.getDay());
-        for (int i = 0; i < ticketList.size(); i++) {
+        //List<TicketFreeDto> ticketList = ticketService.findListFreeTickets(Specialization
+           //     .fromString(request.getSpecialization()), request.getMin(), request.getDay());
+        //List<TicketFreeDto> ticketList = ticketService.findListFreeTickets(request.getCountTickets(), request.getMin(),
+             //   LocalDate.parse(request.getDayStart().toXMLFormat()));
+        List<TicketFreeDto> ticketList = ticketService.findTicketsFreeList(TicketStatus.UNBLOCK);
+       for (int i = 0; i < ticketList.size(); i++) {
             TicketFree ticketFree = new TicketFree();
             BeanUtils.copyProperties(TicketMapper.toTicketFree(ticketList.get(i)), ticketFree);
             ticketFreeList.add(ticketFree);
         }
+
+
         response.getTicketFree().addAll(ticketFreeList);
         return response;
     }

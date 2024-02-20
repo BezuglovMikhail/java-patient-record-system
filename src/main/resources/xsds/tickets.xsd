@@ -8,10 +8,22 @@
             </xs:sequence>
         </xs:complexType>
     </xs:element>
+    <xs:complexType name="ticketFree">
+        <xs:sequence>
+            <xs:element name="ticketId" type="xs:long"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="patronymic" type="xs:string"/>
+            <xs:element name="specialization" type="xs:string"/>
+            <xs:element name="startTime" type="xs:string"/>
+            <xs:element name="endTime" type="xs:string"/>
+            <xs:element name="ticketStatus" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
     <xs:element name="GetTicketByIdResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="ticketBlock" type="tns:ticketBlock"/>
+                <xs:element name="ticketFree" type="tns:ticketFree"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -25,29 +37,16 @@
             <xs:element name="ticketStatus" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:element name="GetTicketsByLastNameAndSpecializationRequest">
+    <xs:element name="GetFreeTicketsRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="specialization" type="xs:string"/>
-                <xs:element name="doctorLastName" type="xs:string"/>
-                <xs:element name="min" type="xs:long"/>
-                <xs:element name="day" type="xs:long"/>
+                <xs:element name="countTickets" type="xs:int"/>
+                <xs:element name="min" type="xs:int"/>
+                <xs:element name="dayStart" type="xs:date"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="ticketFree">
-        <xs:sequence>
-            <xs:element name="ticketId" type="xs:long"/>
-            <xs:element name="firstName" type="xs:string"/>
-            <xs:element name="lastName" type="xs:string"/>
-            <xs:element name="patronymic" type="xs:string"/>
-            <xs:element name="specialization" type="xs:string"/>
-            <xs:element name="startTime" type="xs:string"/>
-            <xs:element name="endTime" type="xs:string"/>
-            <xs:element name="ticketStatus" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
-    <xs:element name="GetTicketsByLastNameAndSpecializationResponse">
+    <xs:element name="GetFreeTicketsResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="ticketFree" type="tns:ticketFree" maxOccurs="unbounded"/>

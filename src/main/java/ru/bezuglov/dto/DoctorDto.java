@@ -14,7 +14,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class DoctorDto {
 
-    private UUID id;
+    private Long id;
+
+    private UUID personalNumber;
 
     private FIODto fio;
 

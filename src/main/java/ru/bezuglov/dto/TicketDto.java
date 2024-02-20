@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class TicketBlockDto {
+public class TicketDto {
 
     private Long id;
 

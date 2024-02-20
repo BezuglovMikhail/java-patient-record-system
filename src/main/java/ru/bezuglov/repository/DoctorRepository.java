@@ -7,7 +7,9 @@ import ru.bezuglov.until.Specialization;
 import java.util.List;
 import java.util.UUID;
 
-public interface DoctorRepository extends JpaRepository<Doctor, UUID> {
+public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     List<Doctor> findAllBySpecialization(Specialization specialization);
+
+    Doctor findByPersonalNumber(UUID personalNumber);
 }

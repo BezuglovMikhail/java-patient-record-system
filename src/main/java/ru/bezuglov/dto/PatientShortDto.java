@@ -4,16 +4,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
 public class PatientShortDto {
 
+    private Long id;
+
     private FIODto fio;
 
-    private UUID id;
-
     private Integer locationNumber;
+
+    @Override
+    public String toString() {
+        return "PatientShortDto{" +
+                "id=" + id +
+                ", fio=" + fio +
+                ", locationNumber=" + locationNumber +
+                '}';
+    }
 }

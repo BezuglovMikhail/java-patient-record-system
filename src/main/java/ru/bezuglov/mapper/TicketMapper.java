@@ -1,16 +1,16 @@
 package ru.bezuglov.mapper;
 
 import lombok.experimental.UtilityClass;
-import ru.bezuglov.dto.DoctorDto;
-import ru.bezuglov.dto.TicketBlockDto;
+import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
 import ru.bezuglov.gs_ws.TicketBlock;
+import ru.bezuglov.gs_ws.TicketFree;
 import ru.bezuglov.model.Doctor;
 import ru.bezuglov.model.Patient;
 import ru.bezuglov.model.Ticket;
-import ru.bezuglov.gs_ws.TicketFree;
 import ru.bezuglov.until.TicketStatus;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -19,66 +19,85 @@ import java.util.stream.Collectors;
 
 @UtilityClass
 public class TicketMapper {
-    Long numberTicket = 0L;
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Ticket toTicketNewBlockDto(TicketFreeDto ticketFreeDto, Doctor doctor, Patient patient) {
-        Ticket ticketBlock = new Ticket();
-        ticketBlock.setDoctor(doctor);
+    public Ticket toTicketNewBlockDto(Ticket ticketFree, Patient patient) {
+        Ticket ticketBlock = ticketFree;
         ticketBlock.setPatient(patient);
-        ticketBlock.setStartTime(ticketFreeDto.getStartTime());
-        ticketBlock.setEndTime(ticketFreeDto.getEndTime());
         ticketBlock.setStatus(TicketStatus.BLOCK);
         return ticketBlock;
     }
 
-    public List<TicketFreeDto> toTicketFreeDto(DoctorDto doctor, Long min, Long countDay,
-                                               List<TicketBlockDto> ticketBlocks) {
-        List<TicketFreeDto> ticketFreeList = new ArrayList<>();
+    public List<Ticket> toTicketList(Integer countTickets, Integer min, LocalDate dayStart, Doctor doctor,
+                                     List<TicketDto> ticketsBlock, List<TicketFreeDto> ticketsFree) {
+        List<Ticket> ticketFreeList = new ArrayList<>();
         LocalDateTime nowDay = LocalDateTime.now();
-        List<LocalDateTime> ticketBlockStartTimes = ticketBlocks.stream().map(e -> e.getStartTime())
+        List<LocalDateTime> ticketStartTimes = ticketsBlock.stream().map(TicketDto::getStartTime)
                 .collect(Collectors.toList());
-        List<LocalDateTime> ticketBlockEndTimes = ticketBlocks.stream().map(e -> e.getEndTime())
+        ticketStartTimes.addAll(ticketsFree.stream().map(TicketFreeDto::getStartTime).toList());
+        List<LocalDateTime> ticketEndTimes = ticketsBlock.stream().map(TicketDto::getEndTime)
                 .collect(Collectors.toList());
+        ticketEndTimes.addAll(ticketsFree.stream().map(TicketFreeDto::getEndTime).toList());
 
-        for (int i = 0; i < countDay; i++) {
+        int count = 0;
+
+        for (int i = 0; count < countTickets; i++) {
             LocalDateTime start;
-            if (i == 0) {
-                start = nowDay.plusMinutes(5);
+            //LocalDateTime startCheck = LocalDateTime.of(dayStart, doctor.getEndWork());
+
+            if (i == 0 && LocalDateTime.of(dayStart, doctor.getEndWork()).isAfter(LocalDateTime.now())
+                    && LocalDateTime.of(dayStart, doctor.getStartWork()).isBefore(LocalDateTime.now())) {
+                start = LocalDateTime.now().plusMinutes(10);
+            } else if (i == 0 && LocalDateTime.now().isBefore(LocalDateTime.of(dayStart, doctor.getStartWork()))) {
+                start = LocalDateTime.of(dayStart, doctor.getStartWork());
             } else {
                 nowDay = nowDay.plusDays(1);
                 start = LocalDateTime.of(nowDay.toLocalDate(), doctor.getStartWork());
             }
-            for (LocalDateTime startTime = start; startTime.toLocalTime()
-                    .isBefore(doctor.getEndWork());
+            for (LocalDateTime startTime = start;
+                 startTime.toLocalTime().isBefore(doctor.getEndWork()) && count < countTickets;
                  startTime = startTime.plusMinutes(min)) {
-                if (!ticketBlockStartTimes.contains(startTime) && !ticketBlockEndTimes
-                        .contains(startTime.minusMinutes(1))) {
-                    TicketFreeDto ticketFree = new TicketFreeDto();
-                    ticketFree.setId(++numberTicket);
-                    ticketFree.setTicketStatus(TicketStatus.UNBLOCK);
-                    ticketFree.setDoctor(DoctorMapper.toDoctorShortDto(doctor));
+                if (!ticketStartTimes.contains(startTime)
+                        && startTime.toLocalTime().plusMinutes(min - 1).isBefore(doctor.getEndWork())
+                        && !ticketEndTimes.contains(startTime.minusMinutes(1))) {
+                    Ticket ticketFree = new Ticket();
+                    ticketFree.setStatus(TicketStatus.UNBLOCK);
+                    ticketFree.setDoctor(doctor);
                     ticketFree.setStartTime(startTime);
                     ticketFree.setEndTime(startTime.plusMinutes(min));
                     ticketFreeList.add(ticketFree);
+                    count++;
                 }
             }
         }
         return ticketFreeList;
     }
 
-    public TicketBlockDto toTicketBlockDto(Ticket ticket) {
-        TicketBlockDto ticketBlock = new TicketBlockDto();
-        ticketBlock.setId(ticket.getId());
-        ticketBlock.setDoctor(DoctorMapper.toDoctorDto(ticket.getDoctor()));
-        ticketBlock.setPatient(PatientMapper.toPatientDto(ticket.getPatient()));
-        ticketBlock.setTicketStatus(ticket.getStatus());
-        ticketBlock.setStartTime(ticket.getStartTime());
-        ticketBlock.setEndTime(ticket.getEndTime());
-        return ticketBlock;
+
+    public TicketDto toTicketDto(Ticket ticket) {
+        TicketDto ticketDto = new TicketDto();
+        ticketDto.setId(ticket.getId());
+        ticketDto.setDoctor(DoctorMapper.toDoctorDto(ticket.getDoctor()));
+        ticketDto.setPatient(PatientMapper.toPatientDto(ticket.getPatient()));
+        ticketDto.setTicketStatus(ticket.getStatus());
+        ticketDto.setStartTime(ticket.getStartTime());
+        ticketDto.setEndTime(ticket.getEndTime());
+        return ticketDto;
     }
 
-    public TicketBlock toTicketBlock(TicketBlockDto ticket) {
+    public TicketFree toTicketGetSoap(TicketDto ticket) {
+        TicketFree ticketFree = new TicketFree();
+        ticketFree.setTicketId(ticket.getId());
+        ticketFree.setFirstName(ticket.getDoctor().getFio().getFirstName());
+        ticketFree.setLastName(ticket.getDoctor().getFio().getLastName());
+        ticketFree.setPatronymic(ticket.getDoctor().getFio().getPatronymic());
+        ticketFree.setStartTime(ticket.getStartTime().format(formatter).toString());
+        ticketFree.setEndTime(ticket.getEndTime().format(formatter).toString());
+        ticketFree.setTicketStatus(TicketStatus.BLOCK.name());
+        return ticketFree;
+    }
+
+    /*public TicketBlock toTicketGetSoap(Ticket ticket) {
         TicketBlock ticketBlock = new TicketBlock();
         ticketBlock.setTicketId(ticket.getId());
         ticketBlock.setDoctorLastName(ticket.getDoctor().getFio().getLastName());
@@ -87,7 +106,7 @@ public class TicketMapper {
         ticketBlock.setEndTime(ticket.getEndTime().format(formatter).toString());
         ticketBlock.setTicketStatus(TicketStatus.BLOCK.name());
         return ticketBlock;
-    }
+    }*/
 
     public TicketFree toTicketFree(TicketFreeDto ticketFreeDto) {
         TicketFree ticketFree = new TicketFree();
@@ -117,11 +136,39 @@ public class TicketMapper {
         return newTicket;
     }
 
-    public List<TicketBlockDto> toTicketBlockList(List<Ticket> ticketList) {
-        List<TicketBlockDto> ticketBlockList = new ArrayList<>();
+    public TicketFreeDto toTicketFreeDto(Ticket ticket) {
+        TicketFreeDto ticketFreeDto = new TicketFreeDto();
+        ticketFreeDto.setId(ticket.getId());
+        ticketFreeDto.setDoctor(DoctorMapper.toDoctorShortDto(ticket.getDoctor()));
+        ticketFreeDto.setStartTime(ticket.getStartTime());
+        ticketFreeDto.setEndTime(ticket.getEndTime());
+        ticketFreeDto.setTicketStatus(ticket.getStatus());
+        return ticketFreeDto;
+    }
+
+    public Ticket toTicket(TicketFreeDto ticketFree, Doctor doctor) {
+        Ticket ticket = new Ticket();
+        ticket.setDoctor(doctor);
+        ticket.setStartTime(ticketFree.getStartTime());
+        ticket.setEndTime(ticketFree.getEndTime());
+        ticket.setStatus(ticketFree.getTicketStatus());
+        return ticket;
+    }
+
+    public List<TicketFreeDto> toTicketFreeDtoList(List<Ticket> ticketList) {
+        List<TicketFreeDto> ticketFreeList = new ArrayList<>();
 
         for (Ticket ticket : ticketList) {
-            ticketBlockList.add(toTicketBlockDto(ticket));
+            ticketFreeList.add(TicketMapper.toTicketFreeDto(ticket));
+        }
+        return ticketFreeList;
+    }
+
+    public List<TicketDto> toTicketBlockList(List<Ticket> ticketList) {
+        List<TicketDto> ticketBlockList = new ArrayList<>();
+
+        for (Ticket ticket : ticketList) {
+            ticketBlockList.add(toTicketDto(ticket));
         }
         return ticketBlockList;
     }

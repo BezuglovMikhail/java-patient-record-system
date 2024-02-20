@@ -12,7 +12,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class PatientDto {
 
-    private UUID id;
+    private Long id;
+
+    private UUID cardNumber;
 
     private FIODto fio;
 

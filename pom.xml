@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>6.4.2.Final</version>
+            <version>5.4.3.Final</version>
         </dependency>
 
         <dependency>
@@ -93,12 +93,10 @@
                     </excludes>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
@@ -129,6 +127,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <id>xjc-schema</id>

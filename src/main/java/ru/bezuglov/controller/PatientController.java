@@ -37,7 +37,7 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public PatientDto getPatient(@PathVariable("id") UUID id) {
+    public PatientDto getPatient(@PathVariable("id") Long id) {
         PatientDto patient = patientService.findPatient(id);
         log.info("Find patient whit cartNumber = {}", id);
         return patient;

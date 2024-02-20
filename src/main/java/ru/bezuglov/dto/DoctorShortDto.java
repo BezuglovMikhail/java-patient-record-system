@@ -5,16 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.bezuglov.until.Specialization;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
 public class DoctorShortDto {
 
-    private FIODto fio;
+    private Long id;
 
-    private UUID id;
+    private FIODto fio;
 
     private Specialization specialization;
 

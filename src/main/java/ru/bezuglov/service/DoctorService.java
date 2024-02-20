@@ -14,6 +14,7 @@ public interface DoctorService {
     List<DoctorShortDto> findListDoctors();
 
     DoctorDto findDoctor(UUID personnelNumber);
+    DoctorDto findDoctor(Long id);
 
     void delete(UUID personnelNumber);
 
