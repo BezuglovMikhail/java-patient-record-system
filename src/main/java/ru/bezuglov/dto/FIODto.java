@@ -15,4 +15,12 @@ public class FIODto {
 
     private String patronymic;
 
+    @Override
+    public String toString() {
+        return "FIODto{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                '}';
+    }
 }
