@@ -45,7 +45,7 @@ class DoctorServiceImplTest {
         checkDoctor.setId(doctorShortDto.getId());
         checkDoctor.setSpecialization(Specialization.OCULIST);
 
-        assertEquals(doctorShortDto.getId(), checkDoctor.getId());
+        assertEquals(doctorShortDto, checkDoctor);
     }
 
     @Test
