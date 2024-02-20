@@ -17,4 +17,13 @@ public class DoctorShortDto {
     private UUID id;
 
     private Specialization specialization;
+
+    @Override
+    public String toString() {
+        return "DoctorShortDto{" +
+                "fio=" + fio +
+                ", id=" + id +
+                ", specialization=" + specialization +
+                '}';
+    }
 }
