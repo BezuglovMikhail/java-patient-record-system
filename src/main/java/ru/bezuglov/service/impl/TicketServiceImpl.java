@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
-import ru.bezuglov.gs_ws.TicketBlock;
-import ru.bezuglov.gs_ws.TicketFree;
-import ru.bezuglov.mapper.TicketMapper;
+import ru.bezuglov.mapper.TicketMapperStatic;
 import ru.bezuglov.model.Doctor;
 import ru.bezuglov.model.Patient;
 import ru.bezuglov.model.Ticket;
@@ -38,8 +36,8 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketDto save(Long ticketFreeId, UUID cardNumber) {
         Patient patient = patientRepository.findByCardNumber(cardNumber);
-        Ticket ticketBlock = TicketMapper.toTicketNewBlockDto(ticketRepository.getReferenceById(ticketFreeId), patient);
-        return TicketMapper.toTicketDto(ticketRepository.save(ticketBlock));
+        Ticket ticketBlock = TicketMapperStatic.toTicketNewBlockDto(ticketRepository.getReferenceById(ticketFreeId), patient);
+        return TicketMapperStatic.toTicketDto(ticketRepository.save(ticketBlock));
     }
 
     @Override
@@ -47,7 +45,7 @@ public class TicketServiceImpl implements TicketService {
         Patient patient = patientRepository.findByCardNumber(cardNumber);
         Doctor doctor = doctorRepository.getReferenceById(ticketUpdate.getDoctor().getId());
         Ticket ticket = ticketRepository.getReferenceById(ticketId);
-        return TicketMapper.toTicketDto(ticketRepository.save(TicketMapper.toUpdateTicket(ticketUpdate,
+        return TicketMapperStatic.toTicketDto(ticketRepository.save(TicketMapperStatic.toUpdateTicket(ticketUpdate,
                 ticket, doctor, patient)));
     }
 
@@ -61,17 +59,17 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public TicketDto findTicket(Long ticketId) {
-        TicketDto ticket = TicketMapper.toTicketDto(ticketRepository.getReferenceById(ticketId));
+        TicketDto ticket = TicketMapperStatic.toTicketDto(ticketRepository.getReferenceById(ticketId));
        return ticket;
     }
 
     @Override
     public TicketFreeDto findTicketFree(Long id) {
-        return TicketMapper.toTicketFreeDto(ticketRepository.getReferenceById(id));
+        return TicketMapperStatic.toTicketFreeDto(ticketRepository.getById(id));
     }
 
     private List<TicketFreeDto> saveFreeTicketsList(List<Ticket> ticketFreeList) {
-        return TicketMapper.toTicketFreeDtoList(ticketRepository.saveAll(ticketFreeList));
+        return TicketMapperStatic.toTicketFreeDtoList(ticketRepository.saveAll(ticketFreeList));
     }
 
     @Override
@@ -81,11 +79,11 @@ public class TicketServiceImpl implements TicketService {
         List<Ticket> ticketFreeList = new ArrayList<>();
 
         for (Doctor doctor : doctorList) {
-            List<TicketDto> ticketBlockList = TicketMapper.toTicketBlockList(ticketRepository
+            List<TicketDto> ticketBlockList = TicketMapperStatic.toTicketBlockList(ticketRepository
                     .findAllByStatus(TicketStatus.BLOCK));
-            List<TicketFreeDto> ticketFreeDtoList = TicketMapper.toTicketFreeDtoList(ticketRepository
+            List<TicketFreeDto> ticketFreeDtoList = TicketMapperStatic.toTicketFreeDtoList(ticketRepository
                     .findAllByStatus(TicketStatus.UNBLOCK));
-            ticketFreeList.addAll(TicketMapper.toTicketList(countTickets, min, dayStart,
+            ticketFreeList.addAll(TicketMapperStatic.toTicketList(countTickets, min, dayStart,
                     doctor, ticketBlockList, ticketFreeDtoList));
         }
         return saveFreeTicketsList(ticketFreeList);
@@ -93,33 +91,33 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<TicketDto> findTicketsBlockList(TicketStatus status) {
-        List<TicketDto> ticketBlockList = TicketMapper.toTicketBlockList(ticketRepository.findAllByStatus(status));
+        List<TicketDto> ticketBlockList = TicketMapperStatic.toTicketBlockList(ticketRepository.findAllByStatus(status));
         return ticketBlockList;
     }
 
     @Override
     public List<TicketFreeDto> findTicketsFreeList(TicketStatus status) {
-        List<TicketFreeDto> ticketFreeList = TicketMapper.toTicketFreeDtoList(ticketRepository.findAllByStatus(status));
+        List<TicketFreeDto> ticketFreeList = TicketMapperStatic.toTicketFreeDtoList(ticketRepository.findAllByStatus(status));
         return ticketFreeList;
     }
 
     @Override
     public List<TicketDto> findAllTicketsByPatientId(Long patientId) {
-        List<TicketDto> ticketBlockList = TicketMapper.toTicketBlockList(ticketRepository
+        List<TicketDto> ticketBlockList = TicketMapperStatic.toTicketBlockList(ticketRepository
                 .findAllByPatient_Id(patientId));
         return ticketBlockList;
     }
 
     @Override
     public List<TicketDto> findAllTicketsByPatientCardNumber(UUID cardNumber) {
-        List<TicketDto> ticketBlockList = TicketMapper.toTicketBlockList(ticketRepository
+        List<TicketDto> ticketBlockList = TicketMapperStatic.toTicketBlockList(ticketRepository
                 .findAllByPatient_CardNumber(cardNumber));
         return ticketBlockList;
     }
 
     @Override
     public List<TicketFreeDto> findFreeTicketsByDoctorIdForDay(Long doctorId, LocalDate day) {
-        List<TicketFreeDto> ticketFreeList = TicketMapper
+        List<TicketFreeDto> ticketFreeList = TicketMapperStatic
                .toTicketFreeDtoList(ticketRepository
                .searchAllByDoctor_IdAndDay(doctorId, day));
         return ticketFreeList;

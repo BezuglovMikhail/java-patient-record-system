@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.bezuglov.dto.PatientNewDto;
 import ru.bezuglov.dto.PatientDto;
 import ru.bezuglov.dto.PatientShortDto;
-import ru.bezuglov.mapper.PatientMapper;
+import ru.bezuglov.mapper.PatientMapperStatic;
 import ru.bezuglov.model.Patient;
 import ru.bezuglov.repository.PatientRepository;
 import ru.bezuglov.service.PatientService;
@@ -23,13 +23,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientShortDto save(PatientNewDto patientNewDto) {
-        return PatientMapper.toPatientShortDto(patientRepository.save(PatientMapper.toPatient(patientNewDto)));
+        return PatientMapperStatic.toPatientShortDto(patientRepository.save(PatientMapperStatic.toPatient(patientNewDto)));
     }
 
     @Override
     public PatientShortDto update(PatientNewDto patientUpdate, UUID uuid) {
         Patient oldPatient = patientRepository.findByCardNumber(uuid);
-        return PatientMapper.toPatientShortDto(patientRepository.save(PatientMapper
+        return PatientMapperStatic.toPatientShortDto(patientRepository.save(PatientMapperStatic
                 .toUpdatePatientDto(patientUpdate, oldPatient)));
     }
 
@@ -42,16 +42,16 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDto findPatient(UUID cardNumber) {
-        return PatientMapper.toPatientDto(patientRepository.findByCardNumber(cardNumber));
+        return PatientMapperStatic.toPatientDto(patientRepository.findByCardNumber(cardNumber));
     }
 
     @Override
     public PatientDto findPatient(Long id) {
-        return PatientMapper.toPatientDto(patientRepository.getReferenceById(id));
+        return PatientMapperStatic.toPatientDto(patientRepository.getReferenceById(id));
     }
 
     @Override
     public List<PatientShortDto> findListPatients() {
-            return PatientMapper.mapToPatientDto(patientRepository.findAll());
+            return PatientMapperStatic.mapToPatientDto(patientRepository.findAll());
     }
 }

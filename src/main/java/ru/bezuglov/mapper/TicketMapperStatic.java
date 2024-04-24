@@ -3,7 +3,6 @@ package ru.bezuglov.mapper;
 import lombok.experimental.UtilityClass;
 import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
-import ru.bezuglov.gs_ws.TicketBlock;
 import ru.bezuglov.gs_ws.TicketFree;
 import ru.bezuglov.model.Doctor;
 import ru.bezuglov.model.Patient;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @UtilityClass
-public class TicketMapper {
+public class TicketMapperStatic {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public Ticket toTicketNewBlockDto(Ticket ticketFree, Patient patient) {
@@ -77,8 +76,8 @@ public class TicketMapper {
     public TicketDto toTicketDto(Ticket ticket) {
         TicketDto ticketDto = new TicketDto();
         ticketDto.setId(ticket.getId());
-        ticketDto.setDoctor(DoctorMapper.toDoctorDto(ticket.getDoctor()));
-        ticketDto.setPatient(PatientMapper.toPatientDto(ticket.getPatient()));
+        ticketDto.setDoctor(DoctorMapperStatic.toDoctorDto(ticket.getDoctor()));
+        ticketDto.setPatient(PatientMapperStatic.toPatientDto(ticket.getPatient()));
         ticketDto.setTicketStatus(ticket.getStatus());
         ticketDto.setStartTime(ticket.getStartTime());
         ticketDto.setEndTime(ticket.getEndTime());
@@ -139,7 +138,7 @@ public class TicketMapper {
     public TicketFreeDto toTicketFreeDto(Ticket ticket) {
         TicketFreeDto ticketFreeDto = new TicketFreeDto();
         ticketFreeDto.setId(ticket.getId());
-        ticketFreeDto.setDoctor(DoctorMapper.toDoctorShortDto(ticket.getDoctor()));
+        ticketFreeDto.setDoctor(DoctorMapperStatic.toDoctorShortDto(ticket.getDoctor()));
         ticketFreeDto.setStartTime(ticket.getStartTime());
         ticketFreeDto.setEndTime(ticket.getEndTime());
         ticketFreeDto.setTicketStatus(ticket.getStatus());
@@ -159,7 +158,7 @@ public class TicketMapper {
         List<TicketFreeDto> ticketFreeList = new ArrayList<>();
 
         for (Ticket ticket : ticketList) {
-            ticketFreeList.add(TicketMapper.toTicketFreeDto(ticket));
+            ticketFreeList.add(TicketMapperStatic.toTicketFreeDto(ticket));
         }
         return ticketFreeList;
     }

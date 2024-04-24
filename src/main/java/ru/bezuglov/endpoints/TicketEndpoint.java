@@ -6,14 +6,12 @@ import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
-import ru.bezuglov.dto.TicketDto;
 import ru.bezuglov.dto.TicketFreeDto;
 import ru.bezuglov.gs_ws.*;
-import ru.bezuglov.mapper.TicketMapper;
+import ru.bezuglov.mapper.TicketMapperStatic;
 import ru.bezuglov.service.TicketService;
 import ru.bezuglov.until.TicketStatus;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +27,7 @@ private static final String NAMESPACE_URI = "http://www.bezuglov.ru/ticket-ws";
         GetTicketByIdResponse response = new GetTicketByIdResponse();
         //TicketFree ticketFree = new TicketFree();
 
-        TicketFree ticketFree = TicketMapper.toTicketGetSoap(ticketService.findTicket(request.getTicketId()));
+        TicketFree ticketFree = TicketMapperStatic.toTicketGetSoap(ticketService.findTicket(request.getTicketId()));
 
         //ticketFree = TicketMapper.toTicketFree(ticketFreeDto);
         //BeanUtils.copyProperties(TicketMapper.toTicketFree(ticketFreeDto), ticketFree);
@@ -50,7 +48,7 @@ private static final String NAMESPACE_URI = "http://www.bezuglov.ru/ticket-ws";
         List<TicketFreeDto> ticketList = ticketService.findTicketsFreeList(TicketStatus.UNBLOCK);
        for (int i = 0; i < ticketList.size(); i++) {
             TicketFree ticketFree = new TicketFree();
-            BeanUtils.copyProperties(TicketMapper.toTicketFree(ticketList.get(i)), ticketFree);
+            BeanUtils.copyProperties(TicketMapperStatic.toTicketFree(ticketList.get(i)), ticketFree);
             ticketFreeList.add(ticketFree);
         }
 

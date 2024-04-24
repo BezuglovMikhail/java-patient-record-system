@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.bezuglov.dto.DoctorDto;
 import ru.bezuglov.dto.DoctorNewDto;
 import ru.bezuglov.dto.DoctorShortDto;
-import ru.bezuglov.mapper.DoctorMapper;
+import ru.bezuglov.mapper.DoctorMapperStatic;
 import ru.bezuglov.model.Doctor;
 import ru.bezuglov.repository.DoctorRepository;
 import ru.bezuglov.service.DoctorService;
@@ -22,22 +22,22 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public DoctorShortDto save(DoctorNewDto doctorNewDto) {
-        return DoctorMapper.toDoctorShortDto(doctorRepository.save(DoctorMapper.toDoctorNew(doctorNewDto)));
+        return DoctorMapperStatic.toDoctorShortDto(doctorRepository.save(DoctorMapperStatic.toDoctorNew(doctorNewDto)));
     }
 
     @Override
     public List<DoctorShortDto> findListDoctors() {
-        return DoctorMapper.mapToDoctorShortDto(doctorRepository.findAll());
+        return DoctorMapperStatic.mapToDoctorShortDto(doctorRepository.findAll());
     }
 
     @Override
     public DoctorDto findDoctor(UUID personalNumber) {
-        return DoctorMapper.toDoctorDto(doctorRepository.findByPersonalNumber(personalNumber));
+        return DoctorMapperStatic.toDoctorDto(doctorRepository.findByPersonalNumber(personalNumber));
     }
 
     @Override
     public DoctorDto findDoctor(Long id) {
-        return DoctorMapper.toDoctorDto(doctorRepository.getReferenceById(id));
+        return DoctorMapperStatic.toDoctorDto(doctorRepository.getReferenceById(id));
     }
 
     @Override
@@ -49,6 +49,6 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorDto update(DoctorNewDto doctorUpdate, UUID personalNumber) {
         Doctor oldDoctor = doctorRepository.findByPersonalNumber(personalNumber);
-        return DoctorMapper.toDoctorDto(doctorRepository.save(DoctorMapper.toUpdateDto(doctorUpdate, oldDoctor)));
+        return DoctorMapperStatic.toDoctorDto(doctorRepository.save(DoctorMapperStatic.toUpdateDto(doctorUpdate, oldDoctor)));
     }
 }

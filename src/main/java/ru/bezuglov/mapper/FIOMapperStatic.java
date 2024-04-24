@@ -5,7 +5,7 @@ import ru.bezuglov.dto.FIODto;
 import ru.bezuglov.model.FIO;
 
 @UtilityClass
-public class FIOMapper {
+public class FIOMapperStatic {
 
     public FIODto toFIODto(FIO fio) {
         FIODto fioDto = new FIODto();
