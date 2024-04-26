@@ -20,9 +20,9 @@ public class Patient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="card_number", insertable = false, updatable = false, nullable = false)
-    private UUID cardNumber;
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name="card_number", insertable = false, updatable = false, nullable = false)
+    //private UUID cardNumber;
 
     //ФИО
     @Embedded

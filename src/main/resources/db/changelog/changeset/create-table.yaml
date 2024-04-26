@@ -1,0 +1,152 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table
+      author: Bezuglov Mikhail
+      changes:
+        - createTable:
+            tableName: doctors
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: personalNumber
+                  type: uuid
+#                  autoIncrement: UUID_GENERATE_V4 ()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: specialization
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_work
+                  type: TIME WITHOUT TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_work
+                  type: TIME WITHOUT TIME ZONE
+                  constraints:
+                    nullable: false
+              - addUniqueConstraint:
+                  columnNames: first_name, last_name, patronymic, specialization
+                  validate:  true
+
+        - createTable:
+            tableName: patients
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: card_number
+                  type: uuid
+#                  autoIncrement: UUID_GENERATE_V4 ()
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: address
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: birthday
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location_number
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - addUniqueConstraint:
+                  columnNames: first_name, last_name, patronymic, birthday
+                  validate: true
+
+        - createTable:
+            tableName: tickets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: doctor_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+#                    constraintName: ticket_doctor_fk
+#                    referencedTableName: doctors
+#                    referencedColumnNames: id
+              - column:
+                  name: patient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+#                    foreignKeyName: ticket_patient_fk
+#                    referencedTableName: patients
+#                    referencedColumnNames: id
+              - column:
+                  name: start_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+#              - addForeignKeyConstraint:
+#                  baseColumnNames: doctor_id
+#                  baseTableName: tickets
+#              - addUniqueConstraint:
+#                  columnNames: first_name, last_name, patronymic, birthday
+#                  validate: true

@@ -15,7 +15,7 @@ public class PatientMapperStatic {
     public PatientDto toPatientDto(Patient patient) {
         PatientDto patientDto = new PatientDto();
         patientDto.setId(patient.getId());
-        patientDto.setCardNumber(patient.getCardNumber());
+        //patientDto.setCardNumber(patient.getCardNumber());
         patientDto.setFio(FIOMapperStatic.toFIODto(patient.getFio()));
         patientDto.setBirthday(patient.getBirthday());
         patientDto.setAddress(patient.getAddress());

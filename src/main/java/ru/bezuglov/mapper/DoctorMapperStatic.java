@@ -15,7 +15,7 @@ public class DoctorMapperStatic {
     public DoctorDto toDoctorDto(Doctor doctor) {
         DoctorDto doctorDto = new DoctorDto();
         doctorDto.setId(doctor.getId());
-        doctorDto.setPersonalNumber(doctor.getPersonalNumber());
+        //doctorDto.setPersonalNumber(doctor.getPersonalNumber());
         doctorDto.setFio(FIOMapperStatic.toFIODto(doctor.getFio()));
         doctorDto.setSpecialization(doctor.getSpecialization());
         doctorDto.setStartWork(doctor.getStartWork());
@@ -42,7 +42,7 @@ public class DoctorMapperStatic {
     public Doctor toDoctor(DoctorDto doctorDto) {
         Doctor doctor = new Doctor();
         doctor.setId(doctorDto.getId());
-        doctor.setPersonalNumber(doctorDto.getPersonalNumber());
+        //doctor.setPersonalNumber(doctorDto.getPersonalNumber());
         doctor.setFio(FIOMapperStatic.toFIO(doctorDto.getFio()));
         doctor.setSpecialization(doctorDto.getSpecialization());
         doctor.setStartWork(doctorDto.getStartWork());
@@ -62,7 +62,7 @@ public class DoctorMapperStatic {
     public Doctor toUpdateDto(DoctorNewDto updateDoctor, Doctor oldDoctor) {
         Doctor newDoctor = new Doctor();
         newDoctor.setId(oldDoctor.getId());
-        newDoctor.setPersonalNumber(oldDoctor.getPersonalNumber());
+        //newDoctor.setPersonalNumber(oldDoctor.getPersonalNumber());
         newDoctor.setFio(!updateDoctor.getFio().equals(oldDoctor.getFio())
                 ? FIOMapperStatic.toFIO(updateDoctor.getFio())
                 : oldDoctor.getFio());

@@ -21,9 +21,9 @@ public class Doctor {
     private Long id;
 
     //табельный номер
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="personal_number", insertable = false, updatable = false, nullable = false)
-    private UUID personalNumber;
+   // @GeneratedValue(strategy = GenerationType.AUTO)
+    //@Column(name="personal_number", insertable = false, updatable = false, nullable = false)
+    //private UUID personalNumber;
 
     //ФИО
     @Embedded
